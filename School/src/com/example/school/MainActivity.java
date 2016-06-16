@@ -1,10 +1,16 @@
 package com.example.school;
 
+import com.example.school.customcalendar.CalendarActivity;
 import com.example.school.drawer.FragmentDrawer;
 import com.example.school.drawer.FragmentDrawer.FragmentDrawerListener;
-import com.example.school.fragment.FriendsFragment;
+import com.example.school.fragment.AboutFragment;
+import com.example.school.fragment.AnnouncementFragment;
+import com.example.school.fragment.AttendenceFragment;
 import com.example.school.fragment.HomeFragment;
-import com.example.school.fragment.MessagesFragment;
+import com.example.school.fragment.LeaderboardFragment;
+import com.example.school.fragment.SettingFragment;
+import com.example.school.fragment.TestFragment;
+import com.example.school.utility.StringConst;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,10 +18,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements
 		FragmentDrawerListener {
@@ -24,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements
 
 	private Toolbar toolbar;
 	private FragmentDrawer drawerFragment;
+	private SharedPreferences shpref;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,12 +88,43 @@ public class MainActivity extends AppCompatActivity implements
 			title = getString(R.string.title_home);
 			break;
 		case 1:
-			fragment = new FriendsFragment();
-			title = getString(R.string.title_friends);
+			fragment = new AnnouncementFragment();
+			title = getString(R.string.title_announcement);
 			break;
 		case 2:
-			fragment = new MessagesFragment();
-			title = getString(R.string.title_messages);
+			fragment = new TestFragment();
+			title = getString(R.string.title_test);
+			break;
+		case 3:
+			startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
+			break;
+		case 4:
+			fragment = new LeaderboardFragment();
+			title = getString(R.string.title_leaderboard);
+			break;
+		case 5:
+			fragment = new SettingFragment();
+			title = getString(R.string.title_settings);
+			break;
+		case 6:
+			fragment = new AboutFragment();
+			title = getString(R.string.title_about);
+			break;
+		case 7:
+			shpref = getSharedPreferences(StringConst.My_PREFERENCES,
+					MODE_PRIVATE);
+			shpref.edit().clear().commit();
+
+			Intent intent = new Intent(getApplicationContext(),
+					LoginActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+			startActivity(intent);
+			Toast.makeText(getApplicationContext(), "Successfully logout.",
+					Toast.LENGTH_SHORT).show();
+			finish();
+			// closing transition animations
+			overridePendingTransition(R.anim.activity_open_transition,
+					R.anim.activity_close_translate);
 			break;
 		default:
 			break;
