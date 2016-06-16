@@ -52,12 +52,6 @@ public class LoginActivity extends AppCompatActivity implements AsyncInterface {
 
 		shpref = getSharedPreferences(StringConst.My_PREFERENCES,
 				Context.MODE_PRIVATE);
-		String userFn = shpref.getString(StringConst.FIRSTNAME, "");
-		String userLn = shpref.getString(StringConst.LASTNAME, "");
-		String userEmail = shpref.getString(StringConst.EMAIL, "");
-		String userUserName = shpref.getString(StringConst.USERNAME, "");
-		String userDate = shpref.getString(StringConst.CREATED_AT, "");
-
 		
 		_loginButton.setOnClickListener(new View.OnClickListener() {
 
@@ -104,16 +98,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncInterface {
 			}
 		});
 
-		if (ConstantUtility.notEmpty(userFn)
-				&& ConstantUtility.notEmpty(userLn)
-				&& ConstantUtility.notEmpty(userEmail)
-				&& ConstantUtility.notEmpty(userUserName)
-				&& ConstantUtility.notEmpty(userDate)) {
-			Intent intent = new Intent(getApplicationContext(),
-					MainActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
-		}
+		
 	}
 	
 	@Override

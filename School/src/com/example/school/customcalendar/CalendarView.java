@@ -42,6 +42,7 @@ import com.example.school.R;
 import com.example.school.model.CalendarData;
 import com.example.school.model.CalendarData.EventType;
 import com.example.school.utility.ConstantUtility;
+import com.example.school.utility.ConstantUtility.BG_ROUND;
 public class CalendarView  extends LinearLayout {
 	// for logging
 	private static final String LOGTAG = "Calendar View";
@@ -223,7 +224,7 @@ public class CalendarView  extends LinearLayout {
 		calendar.setTime(calData.getEventDate());
 
 		String mColorCode = ConstantUtility.getColorCodeFromEventType(calData
-				.getEventType());
+				.getEventType(),BG_ROUND.DARK_COLOR);
 
 		// Get the image to be changed from the drawable, drawable-xhdpi,
 		// drawable-hdpi,etc folder.

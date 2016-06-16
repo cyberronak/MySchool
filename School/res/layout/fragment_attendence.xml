@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize"
     android:background="@android:color/white"
-    android:orientation="vertical"
-    tools:context="com.example.fragments.HomeFragment" >
+    android:orientation="vertical">
 
     <!-- <include  layout="@layout/toolbar_layout"/> -->
 
@@ -34,7 +33,7 @@
         android:textColor="@color/colorPrimary"
         android:textSize="12dp" />
 
-    <com.custom.CalendarView
+    <com.example.school.customcalendar.CalendarView
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

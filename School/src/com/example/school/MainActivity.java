@@ -1,6 +1,6 @@
 package com.example.school;
 
-import com.example.school.customcalendar.CalendarActivity;
+import com.example.school.customcalendar.CalendarFragment;
 import com.example.school.drawer.FragmentDrawer;
 import com.example.school.drawer.FragmentDrawer.FragmentDrawerListener;
 import com.example.school.fragment.AboutFragment;
@@ -96,7 +96,9 @@ public class MainActivity extends AppCompatActivity implements
 			title = getString(R.string.title_test);
 			break;
 		case 3:
-			startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
+			fragment = new AttendenceFragment();
+			title = getString(R.string.title_attendence);
+//			startActivity(new Intent(getApplicationContext(), CalendarFragment.class));
 			break;
 		case 4:
 			fragment = new LeaderboardFragment();
@@ -116,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements
 			shpref.edit().clear().commit();
 
 			Intent intent = new Intent(getApplicationContext(),
-					LoginActivity.class);
+					SchoolAuthentication.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 			startActivity(intent);
 			Toast.makeText(getApplicationContext(), "Successfully logout.",

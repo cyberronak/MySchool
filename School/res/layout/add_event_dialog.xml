@@ -58,7 +58,6 @@
                 android:id="@+id/input_event_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/TextLabel"
                 android:paddingBottom="5dp" >
 
                 <EditText
@@ -101,7 +100,6 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/input_event_desc"
                 android:layout_width="match_parent"
-                android:theme="@style/TextLabel"
                 android:layout_height="wrap_content"
                 android:paddingBottom="5dp" >
 

@@ -16,6 +16,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 public class ConstantUtility {
+	
+	public enum BG_ROUND
+	{
+		DARK_COLOR,
+		LIGT_COLOR
+	}
+	
 	public static String getURL(String url) {
 		if (url.equals(StringConst.SIGN_IN))
 			return StringConst.URL_SIGN_IN;
@@ -71,14 +78,23 @@ public class ConstantUtility {
 	}
 	
 
-	public static String getColorCodeFromEventType(EventType eventType) {
+	public static String getColorCodeFromEventType(EventType eventType,BG_ROUND bg) {
 		// TODO Auto-generated method stub
 		if (eventType == EventType.Event) {
-			return "#AB47BC";
+			if(bg==BG_ROUND.DARK_COLOR)
+				return "#ab47bc";
+			else
+				return "#edd7f0";
 		} else if (eventType == EventType.Exam) {
-			return "#26A69A";
+			if(bg==BG_ROUND.DARK_COLOR)
+				return "#26a69a";
+			else
+				return "#d6f6f3";
 		} else {
-			return "#42A5F5";
+			if(bg==BG_ROUND.DARK_COLOR)
+				return "#42a5f5";
+			else
+				return "#c4e3fc";
 		}
 	}
 

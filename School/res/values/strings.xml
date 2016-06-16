@@ -32,6 +32,15 @@
         <item>Logout</item>
     </string-array>
 
+    <string name="city_txt">Select City</string>
+    <string name="school_txt">Select School</string>
+    
+    <!-- first spinner labels -->
+    <string-array name="city_array">
+        <item>Income</item>
+        <item>Expense</item>
+    </string-array>
+    
     <string name="title_home">Home</string>
     <string name="title_announcement">Announcement</string>
     <string name="title_test">Test</string>

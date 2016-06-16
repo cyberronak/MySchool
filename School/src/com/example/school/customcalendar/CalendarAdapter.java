@@ -9,11 +9,15 @@ import java.util.List;
 import com.example.school.R;
 import com.example.school.model.CalendarData;
 import com.example.school.utility.ConstantUtility;
+import com.example.school.utility.ConstantUtility.BG_ROUND;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableContainer.DrawableContainerState;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,11 +74,20 @@ public class CalendarAdapter extends ArrayAdapter<Date>
 			{
 				if (ConstantUtility.dateCompare(calObj.getEventDate(), date))
 				{
-					String mColorCode = ConstantUtility.getColorCodeFromEventType(calObj.getEventType());
+					String mColorCode = ConstantUtility.getColorCodeFromEventType(calObj.getEventType(),BG_ROUND.DARK_COLOR);
+					String lighColor= ConstantUtility.getColorCodeFromEventType(calObj.getEventType(),BG_ROUND.LIGT_COLOR);
 					// mark this day for event
-					view.setBackgroundResource(R.drawable.bg_round);
-					GradientDrawable bgShape = (GradientDrawable)view.getBackground();
+					view.setBackgroundResource(R.drawable.bg_event_round);
+					
+					StateListDrawable drawable = (StateListDrawable)view.getBackground();
+					DrawableContainerState dcs = (DrawableContainerState)drawable.getConstantState();
+					Drawable[] drawableItems = dcs.getChildren();
+					GradientDrawable bgShape = (GradientDrawable)drawableItems[0];// item 1 
+					
+					//solid color
 					bgShape.setColor(Color.parseColor(mColorCode));
+					//stroke
+					bgShape.setStroke(3, Color.parseColor(lighColor));
 					// break;
 				}
 			}

@@ -32,6 +32,11 @@ public class StringConst
 	public static final String	SUCCESS_PASSWORD	= "Successfully password updated";
 	public static final String	LOADING_MSG			= "Please wait loading...";
 
+	// SchoolAuthentication form
+	public static final String	MY_CITY				= "City";
+	public static final String	MY_SCHOOL			= "School";
+	public static final String	SPINNER_ERRO		= "Please select spinner..";
+	
 	// Login form
 	public static final String	ENTER_USERNAME		= "Please enter username";
 	public static final String	ENTER_PASSWORD		= "Please enter password";
