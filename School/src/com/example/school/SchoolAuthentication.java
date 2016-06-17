@@ -29,12 +29,12 @@ public class SchoolAuthentication extends AppCompatActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
+
 		setContentView(R.layout.activity_city_school);
-		
+
 		shpref = getSharedPreferences(StringConst.My_PREFERENCES,
 				Context.MODE_PRIVATE);
-		
+
 		String userFn = shpref.getString(StringConst.FIRSTNAME, "");
 		String userLn = shpref.getString(StringConst.LASTNAME, "");
 		String userEmail = shpref.getString(StringConst.EMAIL, "");
@@ -51,8 +51,15 @@ public class SchoolAuthentication extends AppCompatActivity implements
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 		}
-		
+
 		spinnerCity = (Spinner) findViewById(R.id.spCity);
+		ArrayAdapter<CharSequence> cityAdapter = ArrayAdapter
+				.createFromResource(getApplicationContext(),
+						R.array.city_array, R.layout.spinner_layout);
+		cityAdapter.setDropDownViewResource(R.layout.spinner_item);
+		spinnerCity.setAdapter(cityAdapter);
+		cityAdapter.notifyDataSetChanged();
+
 		spinnerSchool = (Spinner) findViewById(R.id.spSchool);
 		btnSubmit = (Button) findViewById(R.id.btnSubmit);
 		btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -60,17 +67,18 @@ public class SchoolAuthentication extends AppCompatActivity implements
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(spinnerCity.getSelectedItem().toString().trim().length() > 0 && spinnerSchool.getSelectedItem().toString().trim().length() > 0 )
-				{					
+				if (spinnerCity.getSelectedItem().toString().trim().length() > 0
+						&& spinnerSchool.getSelectedItem().toString().trim()
+								.length() > 0) {
 					SharedPreferences.Editor editor = shpref.edit();
 
-					editor.putString(StringConst.MY_CITY,
-							spinnerCity.getSelectedItem().toString());
-					editor.putString(StringConst.MY_SCHOOL,
-							spinnerSchool.getSelectedItem().toString());
-					
+					editor.putString(StringConst.MY_CITY, spinnerCity
+							.getSelectedItem().toString());
+					editor.putString(StringConst.MY_SCHOOL, spinnerSchool
+							.getSelectedItem().toString());
+
 					editor.commit();
-					
+
 					Intent intent = new Intent(getApplicationContext(),
 							LoginActivity.class);
 					startActivity(intent);
@@ -78,9 +86,10 @@ public class SchoolAuthentication extends AppCompatActivity implements
 					// closing transition animations
 					overridePendingTransition(R.anim.activity_open_transition,
 							R.anim.activity_close_translate);
-				}
-				else
-					Toast.makeText(getApplicationContext(), StringConst.SPINNER_ERRO, Toast.LENGTH_SHORT).show();
+				} else
+					Toast.makeText(getApplicationContext(),
+							StringConst.SPINNER_ERRO, Toast.LENGTH_SHORT)
+							.show();
 			}
 		});
 
@@ -91,31 +100,57 @@ public class SchoolAuthentication extends AppCompatActivity implements
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
 		// TODO Auto-generated method stub
+		ArrayAdapter<String> dataAdapter = null;
 		String sp1 = String.valueOf(spinnerCity.getSelectedItem());
 		Toast.makeText(this, sp1, Toast.LENGTH_SHORT).show();
-		if (sp1.contentEquals("Income")) {
+		if (sp1.contentEquals("Ahmedabad")) {
 			List<String> list = new ArrayList<String>();
-			list.add("Salary");
-			list.add("Sales");
-			list.add("Others");
-			ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-					android.R.layout.simple_spinner_item, list);
-			dataAdapter
-					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			list.add("Ahmedabad International school");
+			list.add("Amrit  Jyoti High School");
+			list.add("St.Kabir School");
+			list.add("St.Xaviers School");
+			list.add("Hebron School");
+			dataAdapter = new ArrayAdapter<String>(this,
+					R.layout.spinner_layout, list);
+			dataAdapter.setDropDownViewResource(R.layout.spinner_item);
 			dataAdapter.notifyDataSetChanged();
 			spinnerSchool.setAdapter(dataAdapter);
-		}
-		if (sp1.contentEquals("Expense")) {
+		} else if (sp1.contentEquals("Surat")) {
 			List<String> list = new ArrayList<String>();
-			list.add("Conveyance");
-			list.add("Breakfast");
-			list.add("Purchase");
-			ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this,
-					android.R.layout.simple_spinner_item, list);
-			dataAdapter2
-					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			dataAdapter2.notifyDataSetChanged();
-			spinnerSchool.setAdapter(dataAdapter2);
+			list.add("Atmiya Vidya Mandir");
+			list.add("Delhi Public School");
+			list.add("Maharaja Agrasen Vidyalaya");
+			list.add("Nirman Vidhya Niketan School");
+			list.add("Vidya Bharti Hindi Vidyalaya");
+			dataAdapter = new ArrayAdapter<String>(this,
+					R.layout.spinner_layout, list);
+			dataAdapter.setDropDownViewResource(R.layout.spinner_item);
+			dataAdapter.notifyDataSetChanged();
+			spinnerSchool.setAdapter(dataAdapter);
+		} else if (sp1.contentEquals("Vadodara")) {
+			List<String> list = new ArrayList<String>();
+			list.add("Reliance School");
+			list.add("Motnath Vidyalaya");
+			list.add("St.Thomas School");
+			list.add("Roosevelt High School");
+			list.add("Shree Narayan Vidyalaya");
+			dataAdapter = new ArrayAdapter<String>(this,
+					R.layout.spinner_layout, list);
+			dataAdapter.setDropDownViewResource(R.layout.spinner_item);
+			dataAdapter.notifyDataSetChanged();
+			spinnerSchool.setAdapter(dataAdapter);
+		} else {
+			List<String> list = new ArrayList<String>();
+			list.add("Modi School");
+			list.add("Dhaval Straed World School");
+			list.add("Jawahar Navodaya Vidyalaya");
+			list.add("Shree Auro English School");
+			list.add("Sunflower English School");
+			dataAdapter = new ArrayAdapter<String>(this,
+					R.layout.spinner_layout, list);
+			dataAdapter.setDropDownViewResource(R.layout.spinner_item);
+			dataAdapter.notifyDataSetChanged();
+			spinnerSchool.setAdapter(dataAdapter);
 		}
 	}
 

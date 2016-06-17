@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="100dp"
+    android:background="@drawable/cardview"
+    android:padding="8dp" >
+ 
+    <!-- Thumbnail Image -->
+ 	<View
+        android:id="@+id/vertical_line"
+        android:layout_width="7dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="8dp" 
+        android:background="#a40404" />
+ 	
+    <!-- Movie Title -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/vertical_line"
+        android:layout_toRightOf="@+id/vertical_line"
+        android:text="News Title"
+        android:textSize="20dp"/>
+ 
+    <!-- Rating -->
+    <TextView
+        android:id="@+id/rating"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="1dip"
+        android:text="Rating :7.8"
+        android:layout_toRightOf="@+id/vertical_line"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+     
+    <!-- Genre -->
+    <TextView
+        android:id="@+id/genre"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rating"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/vertical_line"
+        android:text="Action"
+        android:textColor="#666666"
+        android:textSize="13dp" />
+ 
+    <!-- Release Year -->
+    <TextView
+        android:id="@+id/releaseYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="2016"
+        android:textColor="#666666"
+        android:textSize="12dp" />
+ 
+</RelativeLayout>
