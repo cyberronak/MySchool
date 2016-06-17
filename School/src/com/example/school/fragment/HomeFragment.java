@@ -38,24 +38,24 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         
-        inputLayoutName = (TextInputLayout) rootView.findViewById(R.id.input_layout_name);
-        inputLayoutEmail = (TextInputLayout) rootView.findViewById(R.id.input_layout_email);
-        inputLayoutPassword = (TextInputLayout) rootView.findViewById(R.id.input_layout_password);
-        inputName = (EditText) rootView.findViewById(R.id.input_name);
-        inputEmail = (EditText) rootView.findViewById(R.id.input_email);
-        inputPassword = (EditText) rootView.findViewById(R.id.input_password);
-        btnSignUp = (Button) rootView.findViewById(R.id.btn_signup);
- 
-        inputName.addTextChangedListener(new MyTextWatcher(inputName));
-        inputEmail.addTextChangedListener(new MyTextWatcher(inputEmail));
-        inputPassword.addTextChangedListener(new MyTextWatcher(inputPassword));
- 
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                submitForm();
-            }
-        });
+//        inputLayoutName = (TextInputLayout) rootView.findViewById(R.id.input_layout_name);
+//        inputLayoutEmail = (TextInputLayout) rootView.findViewById(R.id.input_layout_email);
+//        inputLayoutPassword = (TextInputLayout) rootView.findViewById(R.id.input_layout_password);
+//        inputName = (EditText) rootView.findViewById(R.id.input_name);
+//        inputEmail = (EditText) rootView.findViewById(R.id.input_email);
+//        inputPassword = (EditText) rootView.findViewById(R.id.input_password);
+//        btnSignUp = (Button) rootView.findViewById(R.id.btn_signup);
+// 
+//        inputName.addTextChangedListener(new MyTextWatcher(inputName));
+//        inputEmail.addTextChangedListener(new MyTextWatcher(inputEmail));
+//        inputPassword.addTextChangedListener(new MyTextWatcher(inputPassword));
+// 
+//        btnSignUp.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                submitForm();
+//            }
+//        });
 
         // Inflate the layout for this fragment
         return rootView;
@@ -144,15 +144,15 @@ public class HomeFragment extends Fragment {
  
         public void afterTextChanged(Editable editable) {
             switch (view.getId()) {
-                case R.id.input_name:
-                    validateName();
-                    break;
-                case R.id.input_email:
-                    validateEmail();
-                    break;
-                case R.id.input_password:
-                    validatePassword();
-                    break;
+//                case R.id.input_name:
+//                    validateName();
+//                    break;
+//                case R.id.input_email:
+//                    validateEmail();
+//                    break;
+//                case R.id.input_password:
+//                    validatePassword();
+//                    break;
             }
         }
     }

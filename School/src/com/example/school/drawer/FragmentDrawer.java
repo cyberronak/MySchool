@@ -1,6 +1,7 @@
 package com.example.school.drawer;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,8 @@ import java.util.List;
 import com.example.school.R;
 import com.example.school.adapter.NavigationDrawerAdapter;
 import com.example.school.model.NavDrawerItem;
+import com.example.school.utility.ConstantUtility;
+import com.example.school.utility.StringConst;
 
 public class FragmentDrawer extends Fragment {
 
@@ -34,7 +38,7 @@ public class FragmentDrawer extends Fragment {
     private static TypedArray icons = null;
     private static String[] titles = null;
     private FragmentDrawerListener drawerListener;
-
+    private SharedPreferences shpref;
     public FragmentDrawer() {
 
     }
@@ -73,6 +77,15 @@ public class FragmentDrawer extends Fragment {
                              Bundle savedInstanceState) {
         // Inflating view layout
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        
+		shpref = getActivity().getSharedPreferences(StringConst.My_PREFERENCES, 0);
+		String userFn = shpref.getString(StringConst.FIRSTNAME, "");
+		String userLn = shpref.getString(StringConst.LASTNAME, "");
+
+		TextView userName = (TextView) layout.findViewById(R.id.user_title);
+		userName.setText(ConstantUtility.toCamelCase(userFn + " " + userLn));
+		
+        
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
 
         adapter = new NavigationDrawerAdapter(getActivity(), getData());

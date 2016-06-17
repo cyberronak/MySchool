@@ -7,27 +7,12 @@
     android:background="@android:color/white"
     android:orientation="vertical" >
 
-   <TextView
-        android:id="@+id/label"
-        android:layout_width="fill_parent"
+    <ListView
+        android:id="@+id/announcement_list_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="100dp"
-        android:gravity="center_horizontal"
-        android:text="ANNOUNCEMENT"
-        android:textColor="@color/colorPrimary"
-        android:textSize="45dp"
-        android:textStyle="bold" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" >
+    </ListView>
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/label"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="10dp"
-        android:gravity="center_horizontal"
-        android:text="Edit fragment_announcement.xml to change the appearance"
-        android:textColor="@color/colorPrimary"
-        android:textSize="12dp" />
-    
 </RelativeLayout>

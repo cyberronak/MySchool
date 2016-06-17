@@ -1,13 +1,20 @@
 package com.example.school.model;
 
 public class AnnouncementData {
-	private String type;
+	public enum ANNOUNCEMENT_TYPE
+	{
+		NEWS,
+		EVENTS,
+		EXAMS		
+	}
+	
+	private ANNOUNCEMENT_TYPE type;
 	private String title;
 	private String sub_title;
 	private String desc;
 	private String date;
 	
-	public AnnouncementData(String type, String title, String sub_title, String desc, String date) {
+	public AnnouncementData(ANNOUNCEMENT_TYPE type, String title, String sub_title, String desc, String date) {
 		// TODO Auto-generated constructor stub
 		this.type=type;
 		this.title=title;
@@ -16,10 +23,10 @@ public class AnnouncementData {
 		this.date=date;
 }
 	
-	public String getType() {
+	public ANNOUNCEMENT_TYPE getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(ANNOUNCEMENT_TYPE type) {
 		this.type = type;
 	}
 	public String getTitle() {

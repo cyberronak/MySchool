@@ -8,6 +8,10 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
+    <string name="exam">Exam</string>
+    <string name="event">Event</string>
+    <string name="holiday">Holiday</string>
+    
     <!-- navigation drawer item image -->
     <integer-array name="nav_drawer_image">
         <item>@drawable/ic_home</item>
