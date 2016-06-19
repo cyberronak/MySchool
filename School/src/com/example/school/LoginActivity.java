@@ -42,8 +42,8 @@ public class LoginActivity extends AppCompatActivity implements AsyncInterface {
 		setContentView(R.layout.activity_login);
 		
 		//opening transition animations
-	    overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_transition);
-
+		overridePendingTransition(R.anim.slide_in_left,
+				R.anim.slide_out_right);
 		
 		_emailText = (EditText) findViewById(R.id.input_email);
 		_passwordText = (EditText) findViewById(R.id.input_password);
@@ -94,8 +94,8 @@ public class LoginActivity extends AppCompatActivity implements AsyncInterface {
 				startActivity(intent);
 			    finish();
 				//closing transition animations
-			    overridePendingTransition(R.anim.activity_open_transition,R.anim.activity_close_translate);
-			}
+				overridePendingTransition(R.anim.slide_in_left,
+						R.anim.slide_out_right);			}
 		});
 
 		
@@ -107,16 +107,16 @@ public class LoginActivity extends AppCompatActivity implements AsyncInterface {
 		super.onBackPressed();
 		this.finish();
 		//closing transition animations
-	    overridePendingTransition(R.anim.activity_open_transition,R.anim.activity_close_translate);
-	}
+		overridePendingTransition(R.anim.slide_in_right,
+				R.anim.slide_out_left);	}
 
 	public void onLoginSuccess() {
 		_loginButton.setEnabled(true);
 		pDialog.cancel();
-		//closing transition animations
-	    overridePendingTransition(R.anim.activity_open_transition,R.anim.activity_close_translate);
-
 		finish();
+		//closing transition animations
+		overridePendingTransition(R.anim.slide_in_left,
+				R.anim.slide_out_right);
 	}
 
 	public void onLoginFailed() {

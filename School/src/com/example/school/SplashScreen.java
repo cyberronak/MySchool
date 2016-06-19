@@ -16,7 +16,8 @@ public class SplashScreen extends AppCompatActivity{
     	
     	setContentView(R.layout.splash_screen);
 		//opening transition animations
-	    overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_transition);
+		overridePendingTransition(R.anim.slide_in_left,
+				R.anim.slide_out_right);
 
     	new Handler().postDelayed(new Runnable() {
  
@@ -36,7 +37,8 @@ public class SplashScreen extends AppCompatActivity{
                 finish();
         
 				//closing transition animations
-			    overridePendingTransition(R.anim.activity_open_transition,R.anim.activity_close_translate);
+        		overridePendingTransition(R.anim.slide_in_left,
+        				R.anim.slide_out_right);
 
             }
         }, SPLASH_TIME_OUT);

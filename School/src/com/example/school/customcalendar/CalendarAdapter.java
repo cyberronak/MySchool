@@ -65,7 +65,7 @@ public class CalendarAdapter extends ArrayAdapter<Date>
 
 		if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY && month == mCurrentDate.get(Calendar.MONTH))
 		{
-			view.setBackgroundResource(R.drawable.bg_event_round);
+			view.setBackgroundResource(R.drawable.bg_round);
 		}
 		
 		if (CalendarData.events != null)

@@ -35,30 +35,12 @@ public class SchoolAuthentication extends AppCompatActivity implements
 		shpref = getSharedPreferences(StringConst.My_PREFERENCES,
 				Context.MODE_PRIVATE);
 
-		String userFn = shpref.getString(StringConst.FIRSTNAME, "");
-		String userLn = shpref.getString(StringConst.LASTNAME, "");
-		String userEmail = shpref.getString(StringConst.EMAIL, "");
-		String userUserName = shpref.getString(StringConst.USERNAME, "");
-		String userDate = shpref.getString(StringConst.CREATED_AT, "");
-
-		if (ConstantUtility.notEmpty(userFn)
-				&& ConstantUtility.notEmpty(userLn)
-				&& ConstantUtility.notEmpty(userEmail)
-				&& ConstantUtility.notEmpty(userUserName)
-				&& ConstantUtility.notEmpty(userDate)) {
-			Intent intent = new Intent(getApplicationContext(),
-					MainActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
-		}
-
 		spinnerCity = (Spinner) findViewById(R.id.spCity);
 		ArrayAdapter<CharSequence> cityAdapter = ArrayAdapter
 				.createFromResource(getApplicationContext(),
 						R.array.city_array, R.layout.spinner_layout);
 		cityAdapter.setDropDownViewResource(R.layout.spinner_item);
 		spinnerCity.setAdapter(cityAdapter);
-		cityAdapter.notifyDataSetChanged();
 
 		spinnerSchool = (Spinner) findViewById(R.id.spSchool);
 		btnSubmit = (Button) findViewById(R.id.btnSubmit);
@@ -84,8 +66,8 @@ public class SchoolAuthentication extends AppCompatActivity implements
 					startActivity(intent);
 					finish();
 					// closing transition animations
-					overridePendingTransition(R.anim.activity_open_transition,
-							R.anim.activity_close_translate);
+					overridePendingTransition(R.anim.slide_in_left,
+							R.anim.slide_out_right);
 				} else
 					Toast.makeText(getApplicationContext(),
 							StringConst.SPINNER_ERRO, Toast.LENGTH_SHORT)
@@ -94,6 +76,27 @@ public class SchoolAuthentication extends AppCompatActivity implements
 		});
 
 		spinnerCity.setOnItemSelectedListener(this);
+
+		String userFn = shpref.getString(StringConst.FIRSTNAME, "");
+		String userLn = shpref.getString(StringConst.LASTNAME, "");
+		String userEmail = shpref.getString(StringConst.EMAIL, "");
+		String userUserName = shpref.getString(StringConst.USERNAME, "");
+		String userDate = shpref.getString(StringConst.CREATED_AT, "");
+
+		if (ConstantUtility.notEmpty(userFn)
+				&& ConstantUtility.notEmpty(userLn)
+				&& ConstantUtility.notEmpty(userEmail)
+				&& ConstantUtility.notEmpty(userUserName)
+				&& ConstantUtility.notEmpty(userDate)) {
+			Intent intent = new Intent(getApplicationContext(),
+					MainActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			finish();
+			overridePendingTransition(R.anim.slide_in_left,
+					R.anim.slide_out_right);
+
+		}
 	}
 
 	@Override

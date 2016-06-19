@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/cv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shadow_card"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/test_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:adjustViewBounds="true"
+                    android:text="Conversations"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <ImageView
+                    android:id="@+id/test_arrows"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/arrow_down" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/test_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorPrimaryDark" 
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:visibility="gone"/>
+            
+            <LinearLayout
+                android:id="@+id/test_desc_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:paddingLeft="15dp" 
+                android:paddingRight="15dp" 
+                android:paddingBottom="15dp">
+
+<!--                 <TextView -->
+<!--                     android:id="@+id/card_desc" -->
+<!--                     android:layout_width="wrap_content" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:maxLines="4" -->
+<!--                     android:text="gamedsfsdfdsfvgdfsvsdfgdfssdgdsf dfsfgdsfg fsdg sdfg dsfg   dfsgdfgdfgdfgdfgdfgdfgdfg" -->
+<!--                     android:textAppearance="?android:attr/textAppearanceMedium" -->
+<!--                     android:textColor="@color/colorPrimaryDark" /> -->
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>

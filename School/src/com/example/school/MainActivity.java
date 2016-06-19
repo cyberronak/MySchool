@@ -125,8 +125,8 @@ public class MainActivity extends AppCompatActivity implements
 					Toast.LENGTH_SHORT).show();
 			finish();
 			// closing transition animations
-			overridePendingTransition(R.anim.activity_open_transition,
-					R.anim.activity_close_translate);
+			overridePendingTransition(R.anim.slide_in_right,
+					R.anim.slide_out_left);
 			break;
 		default:
 			break;
