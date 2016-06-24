@@ -1,5 +1,7 @@
 package com.example.school;
 
+import java.lang.reflect.Field;
+
 import com.example.school.customcalendar.CalendarFragment;
 import com.example.school.drawer.FragmentDrawer;
 import com.example.school.drawer.FragmentDrawer.FragmentDrawerListener;
@@ -18,12 +20,18 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.TypefaceSpan;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements
@@ -34,12 +42,21 @@ public class MainActivity extends AppCompatActivity implements
 	private Toolbar toolbar;
 	private FragmentDrawer drawerFragment;
 	private SharedPreferences shpref;
-
+	private Typeface custom_font;
+	private TextView toolbarTitle;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		// load custom fonts
+		custom_font = Typeface.createFromAsset(getAssets(),
+				"fonts/American_Typewriter_Regular.ttf");
+
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
+		toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+		toolbarTitle.setTypeface(custom_font);
+		
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -82,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements
 	private void displayView(int position) {
 		Fragment fragment = null;
 		String title = getString(R.string.app_name);
+
 		switch (position) {
 		case 0:
 			fragment = new HomeFragment();
@@ -98,7 +116,8 @@ public class MainActivity extends AppCompatActivity implements
 		case 3:
 			fragment = new AttendenceFragment();
 			title = getString(R.string.title_attendence);
-//			startActivity(new Intent(getApplicationContext(), CalendarFragment.class));
+			// startActivity(new Intent(getApplicationContext(),
+			// CalendarFragment.class));
 			break;
 		case 4:
 			fragment = new LeaderboardFragment();
@@ -139,8 +158,7 @@ public class MainActivity extends AppCompatActivity implements
 			fragmentTransaction.replace(R.id.container_body, fragment);
 			fragmentTransaction.commit();
 
-			// set the toolbar title
-			getSupportActionBar().setTitle(title);
+			toolbarTitle.setText(title);
 		}
 	}
 }

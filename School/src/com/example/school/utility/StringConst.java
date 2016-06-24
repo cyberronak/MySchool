@@ -35,7 +35,7 @@ public class StringConst
 	// SchoolAuthentication form
 	public static final String	MY_CITY				= "City";
 	public static final String	MY_SCHOOL			= "School";
-	public static final String	SPINNER_ERRO		= "Please select spinner..";
+	public static final String	SPINNER_ERRO		= "Please select spinner value...";
 	
 	// Login form
 	public static final String	ENTER_USERNAME		= "Please enter username";

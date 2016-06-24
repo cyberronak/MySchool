@@ -22,16 +22,27 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_scrollFlags="scroll|enterAlways"
                 android:background="?attr/colorPrimary"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="@string/splash_app_name"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textAppearance="@android:style/TextAppearance.Large" />
+            </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
-
-
     </android.support.design.widget.CoordinatorLayout>
-        <FrameLayout
-            android:id="@+id/container_body"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+
+    <FrameLayout
+        android:id="@+id/container_body"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
     <fragment
         android:id="@+id/fragment_navigation_drawer"
         android:name="com.example.school.drawer.FragmentDrawer"

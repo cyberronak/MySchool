@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">School</string>
+    <string name="splash_app_name">My School</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_search">Search</string>
@@ -38,25 +39,6 @@
 
     <string name="city_txt">Select City</string>
     <string name="school_txt">Select School</string>
-
-    <!-- state spinner list -->
-    <string-array name="state_array">
-        <item>Select State Name</item>
-        <item>Chennai</item>
-        <item>Delhi</item>
-        <item>Gujrat</item>
-        <item>Kolkata</item>
-        <item>Mumbai</item>
-    </string-array>
-    
-    <!-- city spinner list -->
-    <string-array name="city_array">
-        <item>Select City Name</item>
-        <item>Ahemdabad</item>
-        <item>Surat</item>
-        <item>Vadodara</item>
-        <item>Rajkot</item>
-    </string-array>
 
     <string name="title_home">Home</string>
     <string name="title_announcement">Announcement</string>

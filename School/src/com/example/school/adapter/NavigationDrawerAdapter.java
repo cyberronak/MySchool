@@ -2,6 +2,7 @@ package com.example.school.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
+import android.graphics.Typeface;
 import android.graphics.PorterDuff.Mode;
 import android.view.LayoutInflater;
 import android.support.v7.widget.RecyclerView;
@@ -22,10 +23,15 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     private LayoutInflater inflater;
     private Context context;
 
+	private Typeface custom_font;
+	
     public NavigationDrawerAdapter(Context context, List<NavDrawerItem> data) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.data = data;
+
+		// load custom fonts
+		custom_font = Typeface.createFromAsset(context.getAssets(), "fonts/American_Typewriter_Regular.ttf");
     }
 
     public void delete(int position) {
@@ -46,6 +52,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         System.out.println(current.getTitle()+" "+current.getIcon());
         holder.icon.setImageDrawable(current.getIcon());
         holder.title.setText(current.getTitle());
+        holder.title.setTypeface(custom_font);
     }
 
     @Override

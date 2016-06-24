@@ -1,20 +1,31 @@
 package com.example.school;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 public class SplashScreen extends AppCompatActivity{
 	// Splash screen timer
     private static int SPLASH_TIME_OUT = 3000;
     
+    private TextView appName;
+	private Typeface custom_font;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	// TODO Auto-generated method stub
     	super.onCreate(savedInstanceState);
     	
     	setContentView(R.layout.splash_screen);
+
+		// load custom fonts
+		custom_font = Typeface.createFromAsset(getAssets(), "fonts/American_Typewriter_Regular.ttf");
+		
+    	appName=(TextView)findViewById(R.id.tv_splash_app_name);
+    	appName.setTypeface(custom_font);
+    	
 		//opening transition animations
 		overridePendingTransition(R.anim.slide_in_left,
 				R.anim.slide_out_right);
