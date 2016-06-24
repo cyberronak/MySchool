@@ -72,7 +72,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestHandler> {
 		// TODO Auto-generated method stub
 		View view = LayoutInflater.from(parent.getContext()).inflate(
 				R.layout.test_view_row, parent, false);
-
+		
 		TestHandler dataObjectHolder = new TestHandler(view);
 		return dataObjectHolder;
 	}

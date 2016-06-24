@@ -22,7 +22,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 public class SchoolAuthentication extends AppCompatActivity implements
 		OnItemSelectedListener {
 	private SharedPreferences shpref;
-	private Spinner spinnerCity, spinnerSchool;
+	private Spinner spinnerState, spinnerCity, spinnerSchool;
 	private Button btnSubmit;
 
 	@Override
@@ -35,6 +35,13 @@ public class SchoolAuthentication extends AppCompatActivity implements
 		shpref = getSharedPreferences(StringConst.My_PREFERENCES,
 				Context.MODE_PRIVATE);
 
+		spinnerState = (Spinner) findViewById(R.id.spState);
+		ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter
+				.createFromResource(getApplicationContext(),
+						R.array.state_array, R.layout.spinner_layout);
+		stateAdapter.setDropDownViewResource(R.layout.spinner_item);
+		spinnerState.setAdapter(stateAdapter);
+
 		spinnerCity = (Spinner) findViewById(R.id.spCity);
 		ArrayAdapter<CharSequence> cityAdapter = ArrayAdapter
 				.createFromResource(getApplicationContext(),
@@ -43,6 +50,14 @@ public class SchoolAuthentication extends AppCompatActivity implements
 		spinnerCity.setAdapter(cityAdapter);
 
 		spinnerSchool = (Spinner) findViewById(R.id.spSchool);
+		List<String> list = new ArrayList<String>();
+		list.add("Select School Name");
+		ArrayAdapter dataAdapter = new ArrayAdapter<String>(this,
+				R.layout.spinner_layout, list);
+		dataAdapter.setDropDownViewResource(R.layout.spinner_item);
+		dataAdapter.notifyDataSetChanged();
+		spinnerSchool.setAdapter(dataAdapter);
+		
 		btnSubmit = (Button) findViewById(R.id.btnSubmit);
 		btnSubmit.setOnClickListener(new View.OnClickListener() {
 
@@ -105,7 +120,6 @@ public class SchoolAuthentication extends AppCompatActivity implements
 		// TODO Auto-generated method stub
 		ArrayAdapter<String> dataAdapter = null;
 		String sp1 = String.valueOf(spinnerCity.getSelectedItem());
-		Toast.makeText(this, sp1, Toast.LENGTH_SHORT).show();
 		if (sp1.contentEquals("Ahmedabad")) {
 			List<String> list = new ArrayList<String>();
 			list.add("Ahmedabad International school");
@@ -142,7 +156,7 @@ public class SchoolAuthentication extends AppCompatActivity implements
 			dataAdapter.setDropDownViewResource(R.layout.spinner_item);
 			dataAdapter.notifyDataSetChanged();
 			spinnerSchool.setAdapter(dataAdapter);
-		} else {
+		} else if (sp1.contentEquals("Rajkot")) {
 			List<String> list = new ArrayList<String>();
 			list.add("Modi School");
 			list.add("Dhaval Straed World School");

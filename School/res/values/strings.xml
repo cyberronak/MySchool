@@ -39,8 +39,19 @@
     <string name="city_txt">Select City</string>
     <string name="school_txt">Select School</string>
 
-    <!-- first spinner labels -->
+    <!-- state spinner list -->
+    <string-array name="state_array">
+        <item>Select State Name</item>
+        <item>Chennai</item>
+        <item>Delhi</item>
+        <item>Gujrat</item>
+        <item>Kolkata</item>
+        <item>Mumbai</item>
+    </string-array>
+    
+    <!-- city spinner list -->
     <string-array name="city_array">
+        <item>Select City Name</item>
         <item>Ahemdabad</item>
         <item>Surat</item>
         <item>Vadodara</item>

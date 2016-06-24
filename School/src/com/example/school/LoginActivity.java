@@ -1,6 +1,7 @@
 package com.example.school;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.apache.http.NameValuePair;
 import org.json.JSONException;
@@ -14,13 +15,20 @@ import com.example.school.webservice.WebService;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,24 +39,31 @@ public class LoginActivity extends AppCompatActivity implements AsyncInterface {
 	private EditText _emailText;
 	private EditText _passwordText;
 	private Button _loginButton;
-	private TextView _signupLink;
+	private TextView _forgotLink;
 	private String email, password;
-
+	private Typeface custom_font;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_login);
-		
+
+		// load custom fonts
+		custom_font = Typeface.createFromAsset(getAssets(), "fonts/American_Typewriter_Regular.ttf");
+
 		//opening transition animations
 		overridePendingTransition(R.anim.slide_in_left,
 				R.anim.slide_out_right);
 		
 		_emailText = (EditText) findViewById(R.id.input_email);
+		_emailText.setTypeface(custom_font);
 		_passwordText = (EditText) findViewById(R.id.input_password);
+		_passwordText.setTypeface(custom_font);
 		_loginButton = (Button) findViewById(R.id.btn_login);
-		_signupLink = (TextView) findViewById(R.id.link_signup);
+		_loginButton.setTypeface(custom_font);
+		_forgotLink = (TextView) findViewById(R.id.link_forgot);
+		_forgotLink.setTypeface(custom_font);
 
 		shpref = getSharedPreferences(StringConst.My_PREFERENCES,
 				Context.MODE_PRIVATE);
@@ -82,22 +97,48 @@ public class LoginActivity extends AppCompatActivity implements AsyncInterface {
 			}
 		});
 
-		_signupLink.setOnClickListener(new View.OnClickListener() {
-
+		_forgotLink.setOnClickListener(new View.OnClickListener() {
+			
 			@Override
 			public void onClick(View v) {
-				// Start the Signup activity
-				Intent intent = new Intent(getApplicationContext(),
-						SignupActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-			    finish();
-				//closing transition animations
-				overridePendingTransition(R.anim.slide_in_left,
-						R.anim.slide_out_right);			}
-		});
+				// TODO Auto-generated method stub
+				AlertDialog.Builder builder = new AlertDialog.Builder(getApplication());
+				builder.setTitle("Forgot Password");
+				builder.setCancelable(true);
+				LayoutInflater inflater = LayoutInflater.from(getApplication());
 
+				View dialogView = inflater.inflate(R.layout.forgot_dialog, null);
+				builder.setView(dialogView);
+
+				final EditText _forgotEmail = (EditText) dialogView.findViewById(R.id.input_forgot_email);
+				_forgotEmail.setTypeface(custom_font);
+//				Button _forgotSubmitButton = (Button) dialogView.findViewById(R.id.btn_forgot_submit);
+//				_loginButton.setTypeface(custom_font);
+//
+
+				builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// positive button logic
+						String forgotEmail =_forgotEmail.getText().toString();
+						if (forgotEmail.isEmpty()
+								|| !android.util.Patterns.EMAIL_ADDRESS.matcher(forgotEmail)
+										.matches()) {
+							_forgotEmail.setError(StringConst.Valid_EMAIL);
+							return;
+						} else {
+							_forgotEmail.setError(null);
+						}
+						
+						Toast.makeText(getApplicationContext(), "Successfully password updation link sent to your mail...", Toast.LENGTH_SHORT).show();
+					}
+				});
+
+				AlertDialog dialog = builder.create();
+				// display dialog
+				dialog.show();
+			}
+		});
 		
 	}
 	

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/colorPrimary"
     android:fitsSystemWindows="true" >
 
     <LinearLayout
@@ -27,26 +26,41 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="10dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/logo1" />
+            android:src="@drawable/splash_logo" />
 
         <!-- Label -->
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/city_txt"
-            android:textColor="@android:color/white" />
 
-        <!-- Spinner Dropdown -->
+        <!-- Spinner Dropdown-1 -->
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginRight="3dp"
-            android:layout_weight=".28"
-            android:background="@drawable/spinner_border"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/editbox_style"
+            android:orientation="horizontal" >
+
+            <Spinner
+                android:id="@+id/spState"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:gravity="center" />
+        </RelativeLayout>
+
+        <!-- Spinner Dropdown-2 -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/editbox_style"
             android:orientation="horizontal" >
 
             <Spinner
@@ -56,46 +70,18 @@
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
-                android:background="@android:color/transparent"
                 android:gravity="center" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_drop" />
         </RelativeLayout>
 
-        <!-- <Spinner -->
-        <!-- android:id="@+id/spCity" -->
-        <!-- android:layout_width="fill_parent" -->
-        <!-- android:layout_height="wrap_content" -->
-        <!-- android:layout_marginTop="10dp" -->
-        <!-- android:textColor="@android:color/white" -->
-        <!-- android:entries="@array/city_array" /> -->
-
-
-        <!-- Select Label -->
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="18dp"
-            android:text="@string/school_txt"
-            android:textColor="@android:color/white" />
-
-        <!-- Spinner Dropdown -->
+        <!-- Spinner Dropdown-3 -->
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginRight="3dp"
-            android:layout_weight=".28"
-            android:background="@drawable/spinner_border"
+            android:layout_height="50dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/editbox_style"
             android:orientation="horizontal" >
 
             <Spinner
@@ -107,24 +93,9 @@
                 android:layout_marginLeft="5dp"
                 android:background="@android:color/transparent"
                 android:gravity="center" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_drop" />
         </RelativeLayout>
-        <!-- <Spinner -->
-        <!-- android:id="@+id/spSchool" -->
-        <!-- android:layout_width="fill_parent" -->
-        <!-- android:layout_height="wrap_content" -->
-        <!-- android:layout_marginTop="10dp" -->
-        <!-- android:textColor="@android:color/white" /> -->
 
-        <android.support.v7.widget.AppCompatButton
+        <Button
             android:id="@+id/btnSubmit"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
