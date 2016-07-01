@@ -1,14 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark" >
+    android:background="@color/colorPrimary" >
 
     <RelativeLayout
         android:id="@+id/nav_header_container"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/material_header_logo" >
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true" >
 
         <ImageView
             android:id="@+id/header_logo"
@@ -26,15 +25,54 @@
             android:id="@+id/user_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/header_logo"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/header_logo"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingTop="10dp"
+            android:singleLine="true"
+            android:text="user_name"
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/user_roll_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_title"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/header_logo"
             android:ellipsize="end"
             android:maxLines="1"
             android:singleLine="true"
-            android:text="User name"
-            android:textSize="25dp" 
-            android:layout_marginLeft="15dp"
+            android:text="Roll No: 12"
             android:textColor="@android:color/white"
-            android:textStyle="bold|italic"/>
+            android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/ivMobile"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/user_roll_no"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/header_logo"
+            android:src="@drawable/ic_action_phone" />
+
+        <TextView
+            android:id="@+id/tvMobile"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@+id/user_roll_no"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_centerInParent="true"
+            android:layout_alignBaseline="@+id/ivMobile"
+            android:layout_toRightOf="@+id/ivMobile"
+            android:text="item_title"
+            android:textColor="@android:color/white"
+            android:textSize="15dp" />
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -42,6 +80,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/nav_header_container"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="5dp" />
 
 </RelativeLayout>

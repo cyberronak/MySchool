@@ -6,12 +6,14 @@ import com.example.school.customcalendar.CalendarFragment;
 import com.example.school.drawer.FragmentDrawer;
 import com.example.school.drawer.FragmentDrawer.FragmentDrawerListener;
 import com.example.school.fragment.AboutFragment;
-import com.example.school.fragment.AnnouncementFragment;
+import com.example.school.fragment.ExamFragment;
+import com.example.school.fragment.NoticeFragment;
 import com.example.school.fragment.AttendenceFragment;
-import com.example.school.fragment.HomeFragment;
+import com.example.school.fragment.RemarkFragment;
+import com.example.school.fragment.StudentCornerFragment;
 import com.example.school.fragment.LeaderboardFragment;
-import com.example.school.fragment.SettingFragment;
 import com.example.school.fragment.TestFragment;
+import com.example.school.fragment.TopicFragment;
 import com.example.school.utility.StringConst;
 
 import android.support.v4.app.Fragment;
@@ -42,20 +44,20 @@ public class MainActivity extends AppCompatActivity implements
 	private Toolbar toolbar;
 	private FragmentDrawer drawerFragment;
 	private SharedPreferences shpref;
-	private Typeface custom_font;
 	private TextView toolbarTitle;
+	private Typeface _customFontR, _customFontB;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
 		// load custom fonts
-		custom_font = Typeface.createFromAsset(getAssets(),
-				"fonts/American_Typewriter_Regular.ttf");
+		_customFontB = Typeface.createFromAsset(getAssets(),
+				"fonts/American_Typewriter_Bold.ttf");
 
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
 		toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-		toolbarTitle.setTypeface(custom_font);
+		toolbarTitle.setTypeface(_customFontB);
 		
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -102,36 +104,42 @@ public class MainActivity extends AppCompatActivity implements
 
 		switch (position) {
 		case 0:
-			fragment = new HomeFragment();
-			title = getString(R.string.title_home);
+			fragment = new NoticeFragment();
+			title = getString(R.string.title_notice);
 			break;
 		case 1:
-			fragment = new AnnouncementFragment();
-			title = getString(R.string.title_announcement);
-			break;
-		case 2:
-			fragment = new TestFragment();
-			title = getString(R.string.title_test);
-			break;
-		case 3:
 			fragment = new AttendenceFragment();
 			title = getString(R.string.title_attendence);
-			// startActivity(new Intent(getApplicationContext(),
-			// CalendarFragment.class));
+			break;
+		case 2:
+			fragment = new StudentCornerFragment();
+			title = getString(R.string.title_student_corner);
+			break;
+		case 3:
+			fragment = new TestFragment();
+			title = getString(R.string.title_testview);
 			break;
 		case 4:
+			fragment = new ExamFragment();
+			title = getString(R.string.title_exam);
+			break;
+		case 5:
+			fragment = new TopicFragment();
+			title = getString(R.string.title_topic);
+			break;
+		case 6:
+			fragment = new RemarkFragment();
+			title = getString(R.string.title_remark);
+			break;
+		case 7:
 			fragment = new LeaderboardFragment();
 			title = getString(R.string.title_leaderboard);
 			break;
-		case 5:
-			fragment = new SettingFragment();
-			title = getString(R.string.title_settings);
-			break;
-		case 6:
+		case 8:
 			fragment = new AboutFragment();
 			title = getString(R.string.title_about);
 			break;
-		case 7:
+		case 9:
 			shpref = getSharedPreferences(StringConst.My_PREFERENCES,
 					MODE_PRIVATE);
 			shpref.edit().clear().commit();

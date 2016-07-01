@@ -1,6 +1,6 @@
 package com.example.school.model;
 
-public class AnnouncementData {
+public class NoticeData {
 	public enum ANNOUNCEMENT_TYPE
 	{
 		NEWS,
@@ -14,7 +14,7 @@ public class AnnouncementData {
 	private String desc;
 	private String date;
 	
-	public AnnouncementData(ANNOUNCEMENT_TYPE type, String title, String sub_title, String desc, String date) {
+	public NoticeData(ANNOUNCEMENT_TYPE type, String title, String sub_title, String desc, String date) {
 		// TODO Auto-generated constructor stub
 		this.type=type;
 		this.title=title;

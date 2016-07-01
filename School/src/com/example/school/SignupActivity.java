@@ -25,9 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class SignupActivity extends AppCompatActivity implements AsyncInterface {
-	private WebService service;
-	private SharedPreferences shpref;
-	private ProgressDialog pDialog;
+	private WebService _service;
+	private SharedPreferences _shpref;
+	private ProgressDialog _pDialog;
 
 	private EditText _firstnameText;
 	private EditText _lastnameText;
@@ -66,11 +66,11 @@ public class SignupActivity extends AppCompatActivity implements AsyncInterface 
 					return;
 				}
 
-				pDialog = new ProgressDialog(v.getContext());
-				pDialog.setMessage(StringConst.LOADING_MSG);
-				pDialog.setIndeterminate(false);
-				pDialog.setCancelable(false);
-				pDialog.show();
+				_pDialog = new ProgressDialog(v.getContext());
+				_pDialog.setMessage(StringConst.LOADING_MSG);
+				_pDialog.setIndeterminate(false);
+				_pDialog.setCancelable(false);
+				_pDialog.show();
 
 				UserDataHandler handler = new UserDataHandler();
 				ArrayList<NameValuePair> valuePairs = handler.registerUser(
@@ -78,10 +78,10 @@ public class SignupActivity extends AppCompatActivity implements AsyncInterface 
 
 				_signupButton.setEnabled(false);
 
-				service = new WebService(getApplicationContext(),
+				_service = new WebService(getApplicationContext(),
 						StringConst.SIGN_UP, valuePairs);
-				service.mListener = SignupActivity.this;
-				service.execute();
+				_service.mListener = SignupActivity.this;
+				_service.execute();
 			}
 		});
 
@@ -106,7 +106,7 @@ public class SignupActivity extends AppCompatActivity implements AsyncInterface 
 
 	public void onSignupSuccess() {
 		_signupButton.setEnabled(true);
-		pDialog.cancel();
+		_pDialog.cancel();
 		Toast.makeText(this, StringConst.SUCCESS_SIGN_UP, Toast.LENGTH_SHORT)
 				.show();
 		// Start the Signup activity
@@ -184,7 +184,7 @@ public class SignupActivity extends AppCompatActivity implements AsyncInterface 
 				Toast.makeText(this, StringConst.ERROR_ON_NETWORK,
 						Toast.LENGTH_LONG).show();
 				_signupButton.setEnabled(true);
-				pDialog.cancel();
+				_pDialog.cancel();
 			}
 		} else if (flag.equals(StringConst.SIGN_UP)) {
 			String finalResult = (String) result;
@@ -197,10 +197,10 @@ public class SignupActivity extends AppCompatActivity implements AsyncInterface 
 				if (Integer.parseInt(success) == 1) {
 					JSONObject json_user = json_data
 							.getJSONObject(StringConst.USER_DATA);
-					shpref = getSharedPreferences(StringConst.My_PREFERENCES,
+					_shpref = getSharedPreferences(StringConst.My_PREFERENCES,
 							Context.MODE_PRIVATE);
 
-					SharedPreferences.Editor editor = shpref.edit();
+					SharedPreferences.Editor editor = _shpref.edit();
 
 					editor.putString(StringConst.FIRSTNAME,
 							json_user.getString(StringConst.FIRSTNAME));
@@ -219,23 +219,23 @@ public class SignupActivity extends AppCompatActivity implements AsyncInterface 
 					onSignupSuccess();
 				} else if (Integer.parseInt(error) == 2) {
 					_signupButton.setEnabled(true);
-					pDialog.cancel();
+					_pDialog.cancel();
 					Toast.makeText(this, StringConst.USER_EXIST,
 							Toast.LENGTH_SHORT).show();
 				} else if (Integer.parseInt(error) == 3) {
 					_signupButton.setEnabled(true);
-					pDialog.cancel();
-					Toast.makeText(this, StringConst.Valid_EMAIL,
+					_pDialog.cancel();
+					Toast.makeText(this, StringConst.VALID_EMAIL,
 							Toast.LENGTH_SHORT).show();
 				} else {
 					_signupButton.setEnabled(true);
-					pDialog.cancel();
+					_pDialog.cancel();
 					Toast.makeText(this, StringConst.ERROR_SIGN_UP,
 							Toast.LENGTH_SHORT).show();
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
-				pDialog.cancel();
+				_pDialog.cancel();
 				e.printStackTrace();
 			}
 		}

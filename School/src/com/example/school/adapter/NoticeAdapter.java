@@ -16,18 +16,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.school.R;
-import com.example.school.model.AnnouncementData;
+import com.example.school.model.NoticeData;
 import com.example.school.utility.ConstantUtility;
 
-public class AnnouncementAdapter extends ArrayAdapter<AnnouncementData> {
-    public AnnouncementAdapter(Context context, ArrayList<AnnouncementData> data) {
+public class NoticeAdapter extends ArrayAdapter<NoticeData> {
+    public NoticeAdapter(Context context, ArrayList<NoticeData> data) {
         super(context, 0, data);
      }
 
      @Override
      public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-    	 AnnouncementData data = getItem(position);    
+    	 NoticeData data = getItem(position);    
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
            convertView = LayoutInflater.from(getContext()).inflate(R.layout.announcement_list_row, parent, false);

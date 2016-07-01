@@ -2,28 +2,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    android:layout_marginTop="?attr/actionBarSize"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="100dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
+        android:text="Exam"
+        android:textColor="@color/colorPrimary"
         android:textSize="45dp"
-        android:text="MESSAGES"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
-        android:layout_below="@id/label"
-        android:layout_centerInParent="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="12dp"
+        android:layout_below="@id/label"
+        android:layout_centerInParent="true"
         android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
-        android:text="Edit fragment_messages.xml to change the appearance" />
+        android:text="Edit fragment_exam.xml to change the appearance"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12dp" />
 
 </RelativeLayout>

@@ -7,8 +7,8 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.example.school.model.AnnouncementData;
-import com.example.school.model.AnnouncementData.ANNOUNCEMENT_TYPE;
+import com.example.school.model.NoticeData;
+import com.example.school.model.NoticeData.ANNOUNCEMENT_TYPE;
 import com.example.school.model.CalendarData.EventType;
 
 import android.R.string;

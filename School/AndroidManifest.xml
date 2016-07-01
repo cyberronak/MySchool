@@ -40,7 +40,7 @@
             android:theme="@style/MyMaterialTheme" />
         
         <activity
-            android:name="com.example.school.LoginActivity"
+            android:name="com.example.school.MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />
@@ -51,7 +51,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />
         <activity
-            android:name="com.example.school.MainActivity"
+            android:name="com.example.school.LoginActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />

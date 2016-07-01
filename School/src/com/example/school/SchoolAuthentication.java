@@ -20,16 +20,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 public class SchoolAuthentication extends AppCompatActivity implements
 		OnItemSelectedListener {
-	private SharedPreferences shpref;
-	private Spinner spinnerState, spinnerCity, spinnerSchool;
-	private Button btnSubmit;
-	
-	private Typeface custom_font;
+	private SharedPreferences _shpref;
+	private Spinner _spinnerState, _spinnerCity, _spinnerSchool;
+	private Button _btnSubmit;
+	private TextView _title;
+	private Typeface _customFontR, _customFontB;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,40 +40,45 @@ public class SchoolAuthentication extends AppCompatActivity implements
 		setContentView(R.layout.activity_city_school);
 
 		// load custom fonts
-		custom_font = Typeface.createFromAsset(getAssets(), "fonts/American_Typewriter_Regular.ttf");
+		_customFontR = Typeface.createFromAsset(getAssets(),
+				"fonts/American_Typewriter_Regular.ttf");
+		_customFontB = Typeface.createFromAsset(getAssets(),
+				"fonts/American_Typewriter_Bold.ttf");
 		
-		shpref = getSharedPreferences(StringConst.My_PREFERENCES,
+		_shpref = getSharedPreferences(StringConst.My_PREFERENCES,
 				Context.MODE_PRIVATE);
 
+		_title=(TextView) findViewById(R.id.tv_auth_title);
+		_title.setTypeface(_customFontB);
 		/*--------------State spinner--------------*/
-		spinnerState = (Spinner) findViewById(R.id.spState);
+		_spinnerState = (Spinner) findViewById(R.id.spState);
 		setInitState();
-		spinnerState.setOnItemSelectedListener(this);
+		_spinnerState.setOnItemSelectedListener(this);
 
 		/*--------------City spinner--------------*/
-		spinnerCity = (Spinner) findViewById(R.id.spCity);
+		_spinnerCity = (Spinner) findViewById(R.id.spCity);
 		setInitCity();
-		spinnerCity.setOnItemSelectedListener(this);
+		_spinnerCity.setOnItemSelectedListener(this);
 
 		/*--------------School spinner--------------*/
-		spinnerSchool = (Spinner) findViewById(R.id.spSchool);
+		_spinnerSchool = (Spinner) findViewById(R.id.spSchool);
 		setInitSchool();
 
-		btnSubmit = (Button) findViewById(R.id.btnSubmit);
-		btnSubmit.setTypeface(custom_font);
+		_btnSubmit = (Button) findViewById(R.id.btnSubmit);
+		_btnSubmit.setTypeface(_customFontR);
 		
-		btnSubmit.setOnClickListener(new View.OnClickListener() {
+		_btnSubmit.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if (spinnerCity.getSelectedItemPosition() > 0
-						&& spinnerSchool.getSelectedItemPosition() > 0) {
-					SharedPreferences.Editor editor = shpref.edit();
+				if (_spinnerCity.getSelectedItemPosition() > 0
+						&& _spinnerSchool.getSelectedItemPosition() > 0) {
+					SharedPreferences.Editor editor = _shpref.edit();
 
-					editor.putString(StringConst.MY_CITY, spinnerCity
+					editor.putString(StringConst.MY_CITY, _spinnerCity
 							.getSelectedItem().toString());
-					editor.putString(StringConst.MY_SCHOOL, spinnerSchool
+					editor.putString(StringConst.MY_SCHOOL, _spinnerSchool
 							.getSelectedItem().toString());
 
 					editor.commit();
@@ -91,11 +97,11 @@ public class SchoolAuthentication extends AppCompatActivity implements
 			}
 		});
 
-		String userFn = shpref.getString(StringConst.FIRSTNAME, "");
-		String userLn = shpref.getString(StringConst.LASTNAME, "");
-		String userEmail = shpref.getString(StringConst.EMAIL, "");
-		String userUserName = shpref.getString(StringConst.USERNAME, "");
-		String userDate = shpref.getString(StringConst.CREATED_AT, "");
+		String userFn = _shpref.getString(StringConst.FIRSTNAME, "");
+		String userLn = _shpref.getString(StringConst.LASTNAME, "");
+		String userEmail = _shpref.getString(StringConst.EMAIL, "");
+		String userUserName = _shpref.getString(StringConst.USERNAME, "");
+		String userDate = _shpref.getString(StringConst.CREATED_AT, "");
 
 		if (ConstantUtility.notEmpty(userFn)
 				&& ConstantUtility.notEmpty(userLn)
@@ -125,7 +131,7 @@ public class SchoolAuthentication extends AppCompatActivity implements
 		MySpinnerAdapter stateAdapter = new MySpinnerAdapter(this,
 				R.layout.spinner_layout, listState);
 		stateAdapter.setDropDownViewResource(R.layout.spinner_item);
-		spinnerState.setAdapter(stateAdapter);
+		_spinnerState.setAdapter(stateAdapter);
 	}
 
 	private void setInitCity() {
@@ -134,7 +140,7 @@ public class SchoolAuthentication extends AppCompatActivity implements
 		MySpinnerAdapter cityAdapter = new MySpinnerAdapter(this,
 				R.layout.spinner_layout, listCity);
 		cityAdapter.setDropDownViewResource(R.layout.spinner_item);
-		spinnerCity.setAdapter(cityAdapter);
+		_spinnerCity.setAdapter(cityAdapter);
 		cityAdapter.notifyDataSetChanged();
 	}
 
@@ -145,7 +151,7 @@ public class SchoolAuthentication extends AppCompatActivity implements
 				R.layout.spinner_layout, list);
 		dataAdapter.setDropDownViewResource(R.layout.spinner_item);
 		dataAdapter.notifyDataSetChanged();
-		spinnerSchool.setAdapter(dataAdapter);
+		_spinnerSchool.setAdapter(dataAdapter);
 	}
 
 	@Override
@@ -155,7 +161,7 @@ public class SchoolAuthentication extends AppCompatActivity implements
 		switch (parent.getId()) {
 		case R.id.spState:
 			MySpinnerAdapter cityAdapter = null;
-			String sp1 = String.valueOf(spinnerState.getSelectedItem());
+			String sp1 = String.valueOf(_spinnerState.getSelectedItem());
 			if (sp1.contentEquals("Gujrat")) {
 				List<String> listCity = new ArrayList<String>();
 				listCity.add("Select City Name");
@@ -166,7 +172,7 @@ public class SchoolAuthentication extends AppCompatActivity implements
 				cityAdapter = new MySpinnerAdapter(this,
 						R.layout.spinner_layout, listCity);
 				cityAdapter.setDropDownViewResource(R.layout.spinner_item);
-				spinnerCity.setAdapter(cityAdapter);
+				_spinnerCity.setAdapter(cityAdapter);
 				cityAdapter.notifyDataSetChanged();
 			} else if (sp1.contentEquals("Select State Name")) {
 				setInitCity();
@@ -182,7 +188,7 @@ public class SchoolAuthentication extends AppCompatActivity implements
 			break;
 		case R.id.spCity:
 			MySpinnerAdapter dataAdapter = null;
-			String sp2 = String.valueOf(spinnerCity.getSelectedItem());
+			String sp2 = String.valueOf(_spinnerCity.getSelectedItem());
 			if (sp2.contentEquals("Ahemdabad")) {
 				List<String> list = new ArrayList<String>();
 				list.add("Select School Name");
@@ -194,7 +200,7 @@ public class SchoolAuthentication extends AppCompatActivity implements
 				dataAdapter = new MySpinnerAdapter(this,
 						R.layout.spinner_layout, list);
 				dataAdapter.setDropDownViewResource(R.layout.spinner_item);
-				spinnerSchool.setAdapter(dataAdapter);
+				_spinnerSchool.setAdapter(dataAdapter);
 				dataAdapter.notifyDataSetChanged();
 			} else if (sp2.contentEquals("Surat")) {
 				List<String> list = new ArrayList<String>();
@@ -207,7 +213,7 @@ public class SchoolAuthentication extends AppCompatActivity implements
 				dataAdapter = new MySpinnerAdapter(this,
 						R.layout.spinner_layout, list);
 				dataAdapter.setDropDownViewResource(R.layout.spinner_item);
-				spinnerSchool.setAdapter(dataAdapter);
+				_spinnerSchool.setAdapter(dataAdapter);
 				dataAdapter.notifyDataSetChanged();
 			} else if (sp2.contentEquals("Vadodara")) {
 				List<String> list = new ArrayList<String>();
@@ -220,7 +226,7 @@ public class SchoolAuthentication extends AppCompatActivity implements
 				dataAdapter = new MySpinnerAdapter(this,
 						R.layout.spinner_layout, list);
 				dataAdapter.setDropDownViewResource(R.layout.spinner_item);
-				spinnerSchool.setAdapter(dataAdapter);
+				_spinnerSchool.setAdapter(dataAdapter);
 				dataAdapter.notifyDataSetChanged();
 			} else if (sp2.contentEquals("Rajkot")) {
 				List<String> list = new ArrayList<String>();
@@ -233,7 +239,7 @@ public class SchoolAuthentication extends AppCompatActivity implements
 				dataAdapter = new MySpinnerAdapter(this,
 						R.layout.spinner_layout, list);
 				dataAdapter.setDropDownViewResource(R.layout.spinner_item);
-				spinnerSchool.setAdapter(dataAdapter);
+				_spinnerSchool.setAdapter(dataAdapter);
 				dataAdapter.notifyDataSetChanged();
 			}
 			break;
@@ -246,5 +252,4 @@ public class SchoolAuthentication extends AppCompatActivity implements
 		// TODO Auto-generated method stub
 
 	}
-
 }

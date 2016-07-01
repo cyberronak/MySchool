@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlDrawer"
     android:layout_width="match_parent"
     android:layout_height="48dp"
     android:clickable="true"
@@ -24,8 +25,8 @@
         android:gravity="center_vertical"
         android:paddingRight="40dp"
         android:text="item_title"
-        android:textSize="15dp"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:textStyle="bold"/>
     
 
 </RelativeLayout>

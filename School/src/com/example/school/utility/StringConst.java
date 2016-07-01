@@ -40,8 +40,8 @@ public class StringConst
 	// Login form
 	public static final String	ENTER_USERNAME		= "Please enter username";
 	public static final String	ENTER_PASSWORD		= "Please enter password";
-	public static final String	Valid_EMAIL			= "Enter a valid email address";
-	public static final String	Valid_PASSWORD		= "Between 4 and 10 alphanumeric characters";
+	public static final String	VALID_EMAIL			= "Enter a valid email address";
+	public static final String	VALID_PASSWORD		= "Between 4 and 10 alphanumeric characters";
 	public static final String	NO_RESOURCE_FOUND	= "Sorry no resource found...";
 
 	// Registration form

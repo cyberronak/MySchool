@@ -16,7 +16,7 @@
             android:padding="8dp" >
 
             <ImageView
-                android:id="@+id/map_logo"
+                android:id="@+id/logo_address"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentRight="true"
@@ -25,7 +25,7 @@
                 android:background="@drawable/pin" />
 
             <TextView
-                android:id="@+id/address_title"
+                android:id="@+id/lbl_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -35,19 +35,17 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:text="Address:"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20dp" />
+                android:textColor="@color/colorPrimary" />
 
             <TextView
-                android:id="@+id/address_desc"
+                android:id="@+id/txt_address"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/address_title"
-                android:layout_marginTop="5dip"
+                android:layout_below="@+id/lbl_address"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="5dp"
                 android:layout_toLeftOf="@+id/map_logo"
-                android:text="State Highway 602, Mota Varacha-Abrahma Road, Surat, Gujrat-394105"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                android:text="State Highway 602, Mota Varacha-Abrahma Road, Surat, Gujrat-394105" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -56,7 +54,7 @@
             android:padding="8dp" >
 
             <ImageView
-                android:id="@+id/mail_logo"
+                android:id="@+id/logo_mail"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentRight="true"
@@ -65,7 +63,7 @@
                 android:background="@drawable/mail" />
 
             <TextView
-                android:id="@+id/mail_title"
+                android:id="@+id/lbl_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -75,19 +73,17 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:text="Email:"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20dp" />
+                android:textColor="@color/colorPrimary" />
 
             <TextView
-                android:id="@+id/Email_desc"
+                android:id="@+id/txt_email"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/mail_title"
-                android:layout_marginTop="5dip"
+                android:layout_below="@+id/lbl_email"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="5dp"
                 android:layout_toLeftOf="@+id/mail_logo"
-                android:text="ppscambridge@yahoo.com"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                android:text="ppscambridge@yahoo.com" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -96,7 +92,7 @@
             android:padding="8dp" >
 
             <ImageView
-                android:id="@+id/contact_logo"
+                android:id="@+id/logo_contact"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentRight="true"
@@ -105,7 +101,7 @@
                 android:background="@drawable/call" />
 
             <TextView
-                android:id="@+id/contact_title"
+                android:id="@+id/lbl_contact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -115,19 +111,17 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:text="Contect:"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20dp" />
+                android:textColor="@color/colorPrimary" />
 
             <TextView
-                android:id="@+id/contact_desc"
+                android:id="@+id/txt_contact"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/contact_title"
-                android:layout_marginTop="5dip"
+                android:layout_below="@+id/lbl_contact"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="5dp"
                 android:layout_toLeftOf="@+id/contact_logo"
-                android:text="+91-261-6503388"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                android:text="+91-261-6503388" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -136,7 +130,7 @@
             android:padding="8dp" >
 
             <ImageView
-                android:id="@+id/desc_logo"
+                android:id="@+id/logo_desc"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentRight="true"
@@ -145,7 +139,7 @@
                 android:background="@drawable/description" />
 
             <TextView
-                android:id="@+id/desc_title"
+                android:id="@+id/lbl_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -155,20 +149,17 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:text="Description:"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textColor="@color/colorPrimary" />
 
             <TextView
-                android:id="@+id/desc_desc"
+                android:id="@+id/txt_desc"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/desc_title"
-                android:layout_marginTop="5dip"
+                android:layout_below="@+id/lbl_desc"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="50dp"
                 android:layout_toLeftOf="@+id/desc_logo"
-                android:text="P P Savani Chaitanya Vidya Sankul, managed by Prabuddha Education Trust was established on 1989 with 287 student."
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                android:text="P P Savani Chaitanya Vidya Sankul, managed by Prabuddha Education Trust was established on 1989 with 287 student." />
         </RelativeLayout>
     </LinearLayout>
 

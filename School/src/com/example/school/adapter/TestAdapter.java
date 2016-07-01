@@ -32,6 +32,11 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestHandler> {
 			title = (TextView) itemView.findViewById(R.id.test_title);
 			arrowImage = (ImageView) itemView.findViewById(R.id.test_arrows);
 			descLayout = (LinearLayout) itemView.findViewById(R.id.test_desc_layout);
+			if(((LinearLayout) descLayout).getChildCount() > 0) 
+			{
+				Log.i(LOG_TAG, "LinearLayout child remove");
+			    ((LinearLayout) descLayout).removeAllViews(); 				
+			}
 			Log.i(LOG_TAG, "Adding Listener");
 			itemView.setOnClickListener(this);
 		}
@@ -83,6 +88,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestHandler> {
 		holder.title.setText(mDataset.get(position).getTitle());
 		holder.arrowImage.setImageBitmap(mDataset.get(position).getImageArrow());
 		holder.descLayout.addView(TestData.tblList.get(position));
+
 	}
 
 	public void addItem(TestData dataObj, int index) {
