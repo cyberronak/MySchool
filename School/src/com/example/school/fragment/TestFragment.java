@@ -1,21 +1,25 @@
 package com.example.school.fragment;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import com.example.school.R;
 import com.example.school.adapter.TestAdapter;
+import com.example.school.adapter.TestAdapter.MyClickListener;
 import com.example.school.model.TestData;
 import com.example.school.model.TestResult;
 import com.example.school.utility.ConstantUtility;
 
 import android.R.color;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -28,6 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TestFragment extends Fragment {
 
@@ -67,12 +72,49 @@ public class TestFragment extends Fragment {
 		mLayoutManager = new LinearLayoutManager(getActivity());
 		mRecyclerView.setLayoutManager(mLayoutManager);
 		mAdapter = new TestAdapter(getDataSet());
-		// mAdapter.setOnItemClickListener(onAdapterItemClickListener);
+		mAdapter.setOnItemClickListener(myItemClickListener);
 		mRecyclerView.setAdapter(mAdapter);
 
 		// Inflate the layout for this fragment
 		return rootView;
 	}
+
+	TestAdapter.MyClickListener myItemClickListener = new TestAdapter.MyClickListener() {
+
+		@Override
+		public void onItemClick(int position, View v) {
+			// TODO Auto-generated method stub
+			Toast.makeText(getActivity(),
+					getDataSet().get(position).getTitle(), Toast.LENGTH_SHORT)
+					.show();
+
+			AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+
+//			LayoutInflater inflater = LayoutInflater.from(getContext());
+//
+//			View dialogView = inflater
+//					.inflate(R.layout.view_event_dialog, null);
+//			alertDialog.setView(dialogView);
+
+			LinearLayout diagLayout = new LinearLayout(getContext());
+			diagLayout.setOrientation(LinearLayout.VERTICAL);
+			diagLayout.addView(TestData.tblList.get(position));
+			
+			alertDialog.setView(diagLayout);
+			alertDialog.setPositiveButton("Ok",
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// positive button logic
+
+						}
+					});
+
+			AlertDialog dialog = alertDialog.create();
+			// display dialog
+			dialog.show();
+		}
+	};
 
 	private ArrayList<TestData> getDataSet() {
 		Bitmap imageArrow = BitmapFactory.decodeResource(this.getResources(),
@@ -90,24 +132,26 @@ public class TestFragment extends Fragment {
 		TestData.tblList.add(createTableLayout(2, 3, td));
 		testData.add(td);
 
-		// td=new TestData("Test-2", "65", rs, imageArrow);
-		// TestData.tblList.add(createTableLayout(2, 3, TABLE_TYPE.TEST, td));
-		// results.add(td);
+		td = new TestData("Test-2", "65", testResult, imageArrow);
+		TestData.tblList.add(createTableLayout(2, 3, td));
+		testData.add(td);
 
 		return testData;
 	}
 
 	/**
 	 * Create TableLayout programmatically
-	 * 
-	 * @return
 	 */
 	public TableLayout createTableLayout(int rows, int columns, TestData td) {
 
 		// CREATE TABLE
 		TableLayout tableLayout = new TableLayout(getActivity());
 		tableLayout.setStretchAllColumns(true);
-
+		
+		// ADD HEADER
+		tableLayout.addView(addHeader(td.getTitle(), rows, columns));
+		
+		// ADD ROW
 		for (int x = 0; x <= td.getResult().size(); x++) {
 			TestResult rs;
 			if (x > 0)
@@ -119,7 +163,8 @@ public class TestFragment extends Fragment {
 			tableLayout.addView(addTableRow(x, rs.getSubject(),
 					rs.getSubjMark(), rs.getSubjTotal(), !isExtraRow));
 		}
-
+		
+		// ADD FOOTER
 		tableLayout.addView(addTableRow(-1, "Total", String.valueOf(marks),
 				String.valueOf(totalMarks), isExtraRow));
 		tableLayout.addView(addTableRow(-1, "Percent(%)",
@@ -128,6 +173,36 @@ public class TestFragment extends Fragment {
 				isExtraRow));
 
 		return tableLayout;
+	}
+
+	private TableRow addHeader(String title, int rows, int columns) {
+		// CREATE TABLE ROW
+		TableRow tableRow = new TableRow(getActivity());
+
+		// CREATE PARAM FOR MARGINING
+		TableRow.LayoutParams aParams = new TableRow.LayoutParams(
+				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		aParams.topMargin = 2;
+		aParams.rightMargin = 2;
+		aParams.span = columns;
+
+		// CREATE TEXTVIEW
+		TextView a = new TextView(getActivity());
+		// SET PARAMS
+		a.setLayoutParams(aParams);
+		// SET GRAVITY
+		a.setGravity(Gravity.CENTER);
+		// SET BACKGROUND COLOR
+		a.setBackgroundColor(getActivity().getResources().getColor(
+				R.color.colorPrimaryDark));
+		// SET PADDING
+		a.setPadding(20, 20, 20, 20);
+		// SET TEXTVIEW TEXT AND COLOR
+		a.setText(title);
+		a.setTextColor(Color.WHITE);
+		// ADD TEXTVIEW TO TABLEROW
+		tableRow.addView(a);
+		return tableRow;
 	}
 
 	private TableRow addTableRow(int x, String col1Subj, String col1Marks,
@@ -172,7 +247,6 @@ public class TestFragment extends Fragment {
 		c.setPadding(20, 20, 20, 20);
 
 		// SET TEXTVIEW TEXT
-
 		if (x == 0) {
 			a.setText("Subject");
 			b.setText("Marks");

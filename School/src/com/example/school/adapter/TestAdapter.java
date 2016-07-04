@@ -30,37 +30,13 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestHandler> {
 		public TestHandler(View itemView) {
 			super(itemView);
 			title = (TextView) itemView.findViewById(R.id.test_title);
-			arrowImage = (ImageView) itemView.findViewById(R.id.test_arrows);
-			descLayout = (LinearLayout) itemView.findViewById(R.id.test_desc_layout);
-			if(((LinearLayout) descLayout).getChildCount() > 0) 
-			{
-				Log.i(LOG_TAG, "LinearLayout child remove");
-			    ((LinearLayout) descLayout).removeAllViews(); 				
-			}
 			Log.i(LOG_TAG, "Adding Listener");
 			itemView.setOnClickListener(this);
 		}
 
 		@Override
 		public void onClick(View v) {
-			if (arrowBool) {
-				arrowBool = false;
-				View view = (View) v.findViewById(R.id.test_divider);
-				view.setVisibility(View.VISIBLE);
-				LinearLayout description = (LinearLayout) v
-						.findViewById(R.id.test_desc_layout);
-				description.setVisibility(View.VISIBLE);
-				arrowImage.setImageResource(R.drawable.arrow_up);
-			} else {
-				arrowBool = true;
-				View view = (View) v.findViewById(R.id.test_divider);
-				view.setVisibility(View.GONE);
-				LinearLayout description = (LinearLayout) v
-						.findViewById(R.id.test_desc_layout);
-				description.setVisibility(View.GONE);
-				arrowImage.setImageResource(R.drawable.arrow_down);
-			}
-			// myClickListener.onItemClick(getAdapterPosition(), v);
+			myClickListener.onItemClick(getPosition(), v);
 		}
 	}
 
@@ -86,9 +62,6 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestHandler> {
 	public void onBindViewHolder(TestHandler holder, int position) {
 		// TODO Auto-generated method stub
 		holder.title.setText(mDataset.get(position).getTitle());
-		holder.arrowImage.setImageBitmap(mDataset.get(position).getImageArrow());
-		holder.descLayout.addView(TestData.tblList.get(position));
-
 	}
 
 	public void addItem(TestData dataObj, int index) {
