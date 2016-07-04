@@ -8,7 +8,7 @@
     android:orientation="vertical" >
 
     <ListView
-        android:id="@+id/announcement_list_view"
+        android:id="@+id/notice_list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true">

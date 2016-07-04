@@ -84,22 +84,18 @@ public class TestFragment extends Fragment {
 		@Override
 		public void onItemClick(int position, View v) {
 			// TODO Auto-generated method stub
-			Toast.makeText(getActivity(),
-					getDataSet().get(position).getTitle(), Toast.LENGTH_SHORT)
-					.show();
 
-			AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-
-//			LayoutInflater inflater = LayoutInflater.from(getContext());
-//
-//			View dialogView = inflater
-//					.inflate(R.layout.view_event_dialog, null);
-//			alertDialog.setView(dialogView);
+			AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+					getContext());
 
 			LinearLayout diagLayout = new LinearLayout(getContext());
 			diagLayout.setOrientation(LinearLayout.VERTICAL);
+
+			if (TestData.tblList.get(position).getParent() != null)
+				((ViewGroup) TestData.tblList.get(position).getParent())
+						.removeView(TestData.tblList.get(position));
 			diagLayout.addView(TestData.tblList.get(position));
-			
+
 			alertDialog.setView(diagLayout);
 			alertDialog.setPositiveButton("Ok",
 					new DialogInterface.OnClickListener() {
@@ -147,10 +143,10 @@ public class TestFragment extends Fragment {
 		// CREATE TABLE
 		TableLayout tableLayout = new TableLayout(getActivity());
 		tableLayout.setStretchAllColumns(true);
-		
+
 		// ADD HEADER
 		tableLayout.addView(addHeader(td.getTitle(), rows, columns));
-		
+
 		// ADD ROW
 		for (int x = 0; x <= td.getResult().size(); x++) {
 			TestResult rs;
@@ -163,7 +159,7 @@ public class TestFragment extends Fragment {
 			tableLayout.addView(addTableRow(x, rs.getSubject(),
 					rs.getSubjMark(), rs.getSubjTotal(), !isExtraRow));
 		}
-		
+
 		// ADD FOOTER
 		tableLayout.addView(addTableRow(-1, "Total", String.valueOf(marks),
 				String.valueOf(totalMarks), isExtraRow));
@@ -236,10 +232,6 @@ public class TestFragment extends Fragment {
 		b.setLayoutParams(bParams);
 		c.setLayoutParams(cParams);
 
-		// SET BACKGROUND COLOR
-		a.setBackgroundColor(Color.WHITE);
-		b.setBackgroundColor(Color.WHITE);
-		c.setBackgroundColor(Color.WHITE);
 
 		// SET PADDING
 		a.setPadding(20, 20, 20, 20);
@@ -251,7 +243,24 @@ public class TestFragment extends Fragment {
 			a.setText("Subject");
 			b.setText("Marks");
 			c.setText("TotalMarks");
+			
+			a.setTextColor(Color.WHITE);
+			b.setTextColor(Color.WHITE);
+			c.setTextColor(Color.WHITE);
+			
+			a.setBackgroundColor(getActivity().getResources().getColor(
+					R.color.colorPrimaryDark));
+			b.setBackgroundColor(getActivity().getResources().getColor(
+					R.color.colorPrimaryDark));
+			c.setBackgroundColor(getActivity().getResources().getColor(
+					R.color.colorPrimaryDark));
 		} else {
+
+			// SET BACKGROUND COLOR
+			a.setBackgroundColor(Color.WHITE);
+			b.setBackgroundColor(Color.WHITE);
+			c.setBackgroundColor(Color.WHITE);
+
 			String str = x > 0 ? String.valueOf(x) + ") " : "";
 			a.setText(str + col1Subj);
 			b.setText(col1Marks);

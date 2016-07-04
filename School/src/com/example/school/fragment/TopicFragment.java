@@ -68,7 +68,7 @@ public class TopicFragment extends Fragment {
 				arrayOfUsers);
 		// Attach the adapter to a ListView
 		ListView listView = (ListView) rootView
-				.findViewById(R.id.announcement_list_view);
+				.findViewById(R.id.notice_list_view);
 		listView.setAdapter(adapter);
 		// Inflate the layout for this fragment
 		return rootView;

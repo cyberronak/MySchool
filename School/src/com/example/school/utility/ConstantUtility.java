@@ -170,7 +170,7 @@ public class ConstantUtility {
 		try {
 			Date dateObj = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 					.parse(date);
-			String dtString = new SimpleDateFormat("dd/MM/yyyy")
+			String dtString = new SimpleDateFormat("dd MMM yyyy")
 					.format(dateObj);
 			return dtString;
 		} catch (ParseException e) {
