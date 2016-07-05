@@ -45,6 +45,7 @@ public class TestFragment extends Fragment {
 	private RecyclerView mRecyclerView;
 	private TestAdapter mAdapter;
 	private RecyclerView.LayoutManager mLayoutManager;
+	private Typeface _customFontR, _customFontB;
 
 	int marks = 0;
 	int totalMarks = 0;
@@ -60,10 +61,16 @@ public class TestFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 
 	}
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+			Bundle savedInstanceState) {		
+		// load custom fonts
+		_customFontR = Typeface.createFromAsset(getActivity().getAssets(),
+				"fonts/American_Typewriter_Regular.ttf");
+		_customFontB = Typeface.createFromAsset(getActivity().getAssets(),
+				"fonts/American_Typewriter_Bold.ttf");
+
 		final View rootView = inflater.inflate(R.layout.fragment_test,
 				container, false);
 		mRecyclerView = (RecyclerView) rootView
@@ -71,7 +78,7 @@ public class TestFragment extends Fragment {
 		mRecyclerView.setHasFixedSize(true);
 		mLayoutManager = new LinearLayoutManager(getActivity());
 		mRecyclerView.setLayoutManager(mLayoutManager);
-		mAdapter = new TestAdapter(getDataSet());
+		mAdapter = new TestAdapter(getActivity(),getDataSet());
 		mAdapter.setOnItemClickListener(myItemClickListener);
 		mRecyclerView.setAdapter(mAdapter);
 
@@ -97,16 +104,17 @@ public class TestFragment extends Fragment {
 			diagLayout.addView(TestData.tblList.get(position));
 
 			alertDialog.setView(diagLayout);
-			alertDialog.setPositiveButton("Ok",
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// positive button logic
-
-						}
-					});
+//			alertDialog.setPositiveButton("Ok",
+//					new DialogInterface.OnClickListener() {
+//						@Override
+//						public void onClick(DialogInterface dialog, int which) {
+//							// positive button logic
+//
+//						}
+//					});
 
 			AlertDialog dialog = alertDialog.create();
+			dialog.setCancelable(true);
 			// display dialog
 			dialog.show();
 		}
@@ -193,8 +201,9 @@ public class TestFragment extends Fragment {
 				R.color.colorPrimaryDark));
 		// SET PADDING
 		a.setPadding(20, 20, 20, 20);
-		// SET TEXTVIEW TEXT AND COLOR
+		// SET TEXTVIEW TEXT, TYPEFACE AND COLOR
 		a.setText(title);
+		a.setTypeface(_customFontB);
 		a.setTextColor(Color.WHITE);
 		// ADD TEXTVIEW TO TABLEROW
 		tableRow.addView(a);
@@ -240,14 +249,23 @@ public class TestFragment extends Fragment {
 
 		// SET TEXTVIEW TEXT
 		if (x == 0) {
+			
+			// SET TEXT VALUE
 			a.setText("Subject");
 			b.setText("Marks");
 			c.setText("TotalMarks");
 			
+			// SET TEXT COLOR
 			a.setTextColor(Color.WHITE);
 			b.setTextColor(Color.WHITE);
 			c.setTextColor(Color.WHITE);
 			
+			// SET TEXT TYPEFACE
+			a.setTypeface(_customFontB);
+			b.setTypeface(_customFontB);
+			c.setTypeface(_customFontB);
+
+			// SET TEXT BACKGROUND-COLOR
 			a.setBackgroundColor(getActivity().getResources().getColor(
 					R.color.colorPrimaryDark));
 			b.setBackgroundColor(getActivity().getResources().getColor(
@@ -255,38 +273,42 @@ public class TestFragment extends Fragment {
 			c.setBackgroundColor(getActivity().getResources().getColor(
 					R.color.colorPrimaryDark));
 		} else {
+			
+			// SET TEXT VALUE
+			String str = x > 0 ? String.valueOf(x) + ") " : "";
+			a.setText(str + col1Subj);
+			b.setText(col1Marks);
+			c.setText(col1TotleMarks);
+
+			// SET TEXT TYPEFACE
+			a.setTypeface(_customFontR);
+			b.setTypeface(_customFontR);
+			c.setTypeface(_customFontR);
+
+			// SET TEXT COLOR
+			a.setTextColor(getActivity().getResources().getColor(
+					R.color.colorPrimaryDark));
+			b.setTextColor(getActivity().getResources().getColor(
+					R.color.colorPrimaryDark));
+			c.setTextColor(getActivity().getResources().getColor(
+					R.color.colorPrimaryDark));
 
 			// SET BACKGROUND COLOR
 			a.setBackgroundColor(Color.WHITE);
 			b.setBackgroundColor(Color.WHITE);
 			c.setBackgroundColor(Color.WHITE);
-
-			String str = x > 0 ? String.valueOf(x) + ") " : "";
-			a.setText(str + col1Subj);
-			b.setText(col1Marks);
-			c.setText(col1TotleMarks);
+			
+			// ADDED BORDER TO TABLEROW
+			a.setBackgroundResource(R.drawable.table_cell_boarder);
+			b.setBackgroundResource(R.drawable.table_cell_boarder);
+			c.setBackgroundResource(R.drawable.table_cell_boarder);
 		}
-
-		if (x > 0) {
+		
+		if(x > 0)
+		{
 			marks += Integer.parseInt(col1Marks);
-			totalMarks += Integer.parseInt(col1TotleMarks);
-		} else {
-			a.setTypeface(null, Typeface.BOLD);
-			a.setTextColor(getActivity().getResources().getColor(
-					R.color.colorPrimaryDark));
-			b.setTextColor(getActivity().getResources().getColor(
-					R.color.colorPrimaryDark));
-			b.setTypeface(null, Typeface.BOLD);
-
-			c.setTextColor(getActivity().getResources().getColor(
-					R.color.colorPrimaryDark));
-			c.setTypeface(null, Typeface.BOLD);
+			totalMarks += Integer.parseInt(col1TotleMarks);			
 		}
-
-		// ADDED BORDER TO TABLEROW
-		a.setBackgroundResource(R.drawable.table_cell_boarder);
-		b.setBackgroundResource(R.drawable.table_cell_boarder);
-		c.setBackgroundResource(R.drawable.table_cell_boarder);
 
 		// ADD TEXTVIEW TO TABLEROW
 		tableRow.addView(a);

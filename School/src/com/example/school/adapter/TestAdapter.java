@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.example.school.R;
 import com.example.school.model.TestData;
 
+import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +21,8 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestHandler> {
 	private static String LOG_TAG = "TestAdapter";
 	private ArrayList<TestData> mDataset;
 	private static MyClickListener myClickListener;
-
+	private Typeface _customFontR;
+	
 	public static class TestHandler extends RecyclerView.ViewHolder implements
 			OnClickListener {
 		TextView title;
@@ -44,8 +47,10 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestHandler> {
 		this.myClickListener = myClickListener;
 	}
 
-	public TestAdapter(ArrayList<TestData> myDataset) {
+	public TestAdapter(Context context ,ArrayList<TestData> myDataset) {
 		mDataset = myDataset;
+		_customFontR = Typeface.createFromAsset(context.getAssets(),
+				"fonts/American_Typewriter_Regular.ttf");
 	}
 
 	@Override
@@ -62,6 +67,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestHandler> {
 	public void onBindViewHolder(TestHandler holder, int position) {
 		// TODO Auto-generated method stub
 		holder.title.setText(mDataset.get(position).getTitle());
+		holder.title.setTypeface(_customFontR);
 	}
 
 	public void addItem(TestData dataObj, int index) {

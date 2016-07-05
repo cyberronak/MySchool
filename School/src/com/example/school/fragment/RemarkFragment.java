@@ -12,6 +12,7 @@ import com.example.school.utility.ConstantUtility;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,10 +21,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -140,21 +143,35 @@ public class RemarkFragment extends Fragment {
 	        lLayout.addView(tvDesc);
 	        
 	        scroller.addView(lLayout);
-	        diagLayout.addView(scroller);
-	        
+			Button btnCancel = new Button(getContext());
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+			params.setMargins(5, 5, 5, 5);
+			btnCancel.setBackgroundDrawable(getActivity().getResources().getDrawable(R.drawable.shadow_card));
+			btnCancel.setText("Cancel");
+			btnCancel.setTextColor(Color.WHITE);
+			btnCancel.setLayoutParams(params);
+			btnCancel.setGravity(Gravity.CENTER_HORIZONTAL);
+			btnCancel.setTypeface(_customFontR);
+			
+			diagLayout.addView(scroller);
+			diagLayout.addView(btnCancel);
+			
 			alertDialog.setView(diagLayout);
-			alertDialog.setPositiveButton("Cancel",
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// positive button logic
+			
+			final AlertDialog dialog = alertDialog.create();
+			btnCancel.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					dialog.dismiss();
+				}
+			});
 
-						}
-					});
-
-			AlertDialog dialog = alertDialog.create();
 			// display dialog
 			dialog.show();
+
 		}
 	};
 

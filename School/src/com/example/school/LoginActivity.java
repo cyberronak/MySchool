@@ -86,16 +86,23 @@ public class LoginActivity extends AppCompatActivity implements AsyncInterface {
 				_pDialog.setCancelable(false);
 				_pDialog.show();
 
-				UserDataHandler handler = new UserDataHandler();
-				ArrayList<NameValuePair> valuePairs = handler.loginUser(email,
-						password);
-
 				_loginButton.setEnabled(false);
+				Intent upanel = new Intent(getApplicationContext(),
+						MainActivity.class);
+				upanel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(upanel);
+				onLoginSuccess();
 
-				WebService service = new WebService(getApplicationContext(),
-						StringConst.SIGN_IN, valuePairs);
-				service.mListener = LoginActivity.this;
-				service.execute();
+//				UserDataHandler handler = new UserDataHandler();
+//				ArrayList<NameValuePair> valuePairs = handler.loginUser(email,
+//						password);
+//
+//				_loginButton.setEnabled(false);
+//
+//				WebService service = new WebService(getApplicationContext(),
+//						StringConst.SIGN_IN, valuePairs);
+//				service.mListener = LoginActivity.this;
+//				service.execute();
 			}
 		});
 
