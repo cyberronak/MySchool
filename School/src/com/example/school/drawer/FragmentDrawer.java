@@ -140,7 +140,7 @@ public class FragmentDrawer extends Fragment {
             }
         });
         mDrawerToggle.setDrawerIndicatorEnabled(false);
-        mDrawerToggle.setHomeAsUpIndicator(R.drawable.menuicon);
+        mDrawerToggle.setHomeAsUpIndicator(R.drawable.ic_action_menuicon);
         mDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

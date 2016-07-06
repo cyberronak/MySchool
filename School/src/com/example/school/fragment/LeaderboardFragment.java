@@ -1,6 +1,7 @@
 package com.example.school.fragment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.example.school.R;
@@ -9,6 +10,7 @@ import com.example.school.adapter.MySpinnerAdapter;
 import com.example.school.model.TestData;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -21,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -83,66 +86,79 @@ public class LeaderboardFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				// TODO Auto-generated method stub
+				
+				 TextView tvTitle = new TextView(getContext());
+				
+				 tvTitle.setBackgroundColor(getActivity().getResources()
+				 .getColor(R.color.colorPrimaryDark));
+				 tvTitle.setText(R.string.title_subject);
+				 tvTitle.setTextSize(22);
+				 tvTitle.setTextColor(Color.WHITE);
+				 tvTitle.setGravity(Gravity.CENTER);
+				 tvTitle.setTypeface(_customFontB);
+				 tvTitle.setPadding(0, 20, 0, 20);
+				
 				AlertDialog.Builder alertDialog = new AlertDialog.Builder(
 						getContext());
-
-				LinearLayout diagLayout = new LinearLayout(getContext());
-				diagLayout.setOrientation(LinearLayout.VERTICAL);
-
-				TextView tvTitle = new TextView(getContext());
-				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-						LayoutParams.MATCH_PARENT, 50);
-
-				tvTitle.setBackgroundColor(getActivity().getResources()
-						.getColor(R.color.colorPrimaryDark));
-				tvTitle.setText(R.string.title_subject);
-				tvTitle.setTextSize(22);
-				tvTitle.setTextColor(Color.WHITE);
-				tvTitle.setLayoutParams(params);
-				tvTitle.setGravity(Gravity.CENTER);
-				tvTitle.setTypeface(_customFontB);
-
-				params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, 40);
-
-				ScrollView scroller = new ScrollView(getContext());
-
-				LinearLayout lLayout = new LinearLayout(getContext());
-				lLayout.setOrientation(LinearLayout.VERTICAL);
-				lLayout.setGravity(Gravity.CENTER);
-				lLayout.setPadding(5, 5, 5, 5);
-
-				int size = subjectList.length;
-				for (int i = 0; i < size; i++) {
-					// Lookup view for data population
-					TextView tvListItem = new TextView(getContext());
-
-					// Populate the data into the view using the data object
-					tvListItem.setId(i);
-					tvListItem.setText(subjectList[i]);
-					tvListItem.setLayoutParams(params);
-					tvListItem.setGravity(Gravity.CENTER_HORIZONTAL);
-					tvListItem.setTypeface(_customFontR);
-					tvListItem.setTextColor(getContext().getResources()
-							.getColor(R.color.colorPrimaryDark));
-					tvListItem.setTextSize(22);
-					tvListItem.setOnClickListener(mListener);
-					
-					View view = new View(getContext());
-					view.setLayoutParams(new LayoutParams(
-							LayoutParams.MATCH_PARENT, 1));
-					view.setBackgroundColor(Color.GRAY);
-
-					lLayout.addView(tvListItem);
-					if (i != (size - 1))
-						lLayout.addView(view);
-				}
-
-				scroller.addView(lLayout);
-
-				diagLayout.addView(tvTitle);
-				diagLayout.addView(scroller);
-				alertDialog.setView(diagLayout);
+				alertDialog.setCustomTitle(tvTitle);
+				List<String> listData= Arrays.asList(subjectList);
+				
+				MySpinnerAdapter arrayAdapter = new MySpinnerAdapter(getActivity(),
+						R.layout.subject_dialog_row, listData);
+				
+				alertDialog.setAdapter(arrayAdapter, alertDialogListener);
+				// LinearLayout diagLayout = new LinearLayout(getContext());
+				// diagLayout.setOrientation(LinearLayout.VERTICAL);
+				//
+				// TextView tvTitle = new TextView(getContext());
+				//
+				// tvTitle.setBackgroundColor(getActivity().getResources()
+				// .getColor(R.color.colorPrimaryDark));
+				// tvTitle.setText(R.string.title_subject);
+				// tvTitle.setTextSize(22);
+				// tvTitle.setTextColor(Color.WHITE);
+				// tvTitle.setGravity(Gravity.CENTER);
+				// tvTitle.setTypeface(_customFontB);
+				// tvTitle.setPadding(0, 10, 0, 10);
+				//
+				// ScrollView scroller = new ScrollView(getContext());
+				//
+				// LinearLayout lLayout = new LinearLayout(getContext());
+				// lLayout.setOrientation(LinearLayout.VERTICAL);
+				// lLayout.setGravity(Gravity.CENTER);
+				// lLayout.setPadding(5, 5, 5, 5);
+				//
+				// int size = subjectList.length;
+				// for (int i = 0; i < size; i++) {
+				// // Lookup view for data population
+				// TextView tvListItem = new TextView(getContext());
+				//
+				// // Populate the data into the view using the data object
+				// tvListItem.setId(i);
+				// tvListItem.setText(subjectList[i]);
+				// tvListItem.setGravity(Gravity.CENTER_HORIZONTAL);
+				// tvListItem.setTypeface(_customFontR);
+				// tvListItem.setTextColor(getContext().getResources()
+				// .getColor(R.color.colorPrimaryDark));
+				// tvListItem.setTextSize(22);
+				// tvListItem.setOnClickListener(mListener);
+				// tvListItem.setPadding(0, 10, 0, 10);
+				//
+				// View view = new View(getContext());
+				// view.setLayoutParams(new LinearLayout.LayoutParams(
+				// LayoutParams.MATCH_PARENT, 1));
+				// view.setBackgroundColor(Color.GRAY);
+				//
+				// lLayout.addView(tvListItem);
+				// if (i != (size - 1))
+				// lLayout.addView(view);
+				// }
+				//
+				// scroller.addView(lLayout);
+				//
+				// diagLayout.addView(tvTitle);
+				// diagLayout.addView(scroller);
+				// alertDialog.setView(diagLayout);
 
 				// alertDialog.setPositiveButton("Cancel",
 				// new DialogInterface.OnClickListener() {
@@ -163,35 +179,51 @@ public class LeaderboardFragment extends Fragment {
 		// Inflate the layout for this fragment
 		return rootView;
 	}
-	
-	OnClickListener mListener= new View.OnClickListener() {
-		
+
+	// Button Rank and Subject click
+	OnClickListener mListener = new View.OnClickListener() {
+
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			switch (v.getId()) {
 			case 0:
-				Toast.makeText(getContext(), subjectList[0], Toast.LENGTH_SHORT).show();
+				Toast.makeText(getContext(), subjectList[0], Toast.LENGTH_SHORT)
+						.show();
 				break;
 			case 1:
-				Toast.makeText(getContext(), subjectList[1], Toast.LENGTH_SHORT).show();				
+				Toast.makeText(getContext(), subjectList[1], Toast.LENGTH_SHORT)
+						.show();
 				break;
 			case 2:
-				Toast.makeText(getContext(), subjectList[2], Toast.LENGTH_SHORT).show();
+				Toast.makeText(getContext(), subjectList[2], Toast.LENGTH_SHORT)
+						.show();
 				break;
 			case 3:
-				Toast.makeText(getContext(), subjectList[3], Toast.LENGTH_SHORT).show();
+				Toast.makeText(getContext(), subjectList[3], Toast.LENGTH_SHORT)
+						.show();
 				break;
 			case 4:
-				Toast.makeText(getContext(), subjectList[4], Toast.LENGTH_SHORT).show();
+				Toast.makeText(getContext(), subjectList[4], Toast.LENGTH_SHORT)
+						.show();
 				break;
 			case 5:
-				Toast.makeText(getContext(), subjectList[5], Toast.LENGTH_SHORT).show();
+				Toast.makeText(getContext(), subjectList[5], Toast.LENGTH_SHORT)
+						.show();
 				break;
 
 			default:
 				break;
 			}
+		}
+	};
+
+	DialogInterface.OnClickListener alertDialogListener= new DialogInterface.OnClickListener() {
+
+		@Override
+		public void onClick(DialogInterface dialog, int which) {
+			// TODO Auto-generated method stub
+			Toast.makeText(getContext(), subjectList[which], Toast.LENGTH_SHORT).show();
 		}
 	};
 	

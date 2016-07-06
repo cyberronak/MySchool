@@ -43,16 +43,16 @@
     
     <!-- navigation drawer item image -->
     <integer-array name="nav_drawer_image">
-        <item>@drawable/notice</item>
-        <item>@drawable/attendance</item>
-        <item>@drawable/student_corner</item>
-        <item>@drawable/test</item>
-        <item>@drawable/exam</item>
-        <item>@drawable/topic</item>
-        <item>@drawable/ic_action_paste</item>
-        <item>@drawable/leaderboard</item>
-        <item>@drawable/info</item>
-        <item>@drawable/ic_exit</item>
+        <item>@drawable/ic_notice</item>
+        <item>@drawable/ic_attendance</item>
+        <item>@drawable/ic_studentcorner</item>
+        <item>@drawable/ic_test</item>
+        <item>@drawable/ic_exam</item>
+        <item>@drawable/ic_topic</item>
+        <item>@drawable/ic_note</item>
+        <item>@drawable/ic_leaderboard</item>
+        <item>@drawable/ic_info</item>
+        <item>@drawable/ic_logout</item>
     </integer-array>
 
     <!-- navigation drawer item labels -->

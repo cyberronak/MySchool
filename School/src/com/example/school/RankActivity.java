@@ -13,6 +13,7 @@ public class RankActivity extends AppCompatActivity {
 	private Toolbar toolbar;
 	private TextView toolbarTitle;
 	private Typeface _customFontR, _customFontB;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -28,7 +29,7 @@ public class RankActivity extends AppCompatActivity {
 
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrow_left);
+		getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_arrow_left);
 		toolbarTitle.setText(R.string.title_rank);
 	}
 
@@ -47,18 +48,19 @@ public class RankActivity extends AppCompatActivity {
 		// closing transition animations
 		overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
-        case android.R.id.home:
-        	finish();
-        	// closing transition animations
-    		overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
-    }
+		case android.R.id.home:
+			finish();
+			// closing transition animations
+			overridePendingTransition(R.anim.slide_in_right,
+					R.anim.slide_out_left);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 }

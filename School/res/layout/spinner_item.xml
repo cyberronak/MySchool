@@ -2,9 +2,12 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/horizontal_divider"
+    android:ellipsize="end"
     android:gravity="left"
+    android:maxLines="1"
     android:padding="15dp"
+    android:singleLine="true"
     android:text="dsfdsf"
-    android:textSize="20dp" 
     android:textColor="@android:color/black"
-    android:background="@drawable/horizontal_divider"/>
+    android:textSize="20dp" />

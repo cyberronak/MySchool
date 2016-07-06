@@ -122,7 +122,7 @@ public class TestFragment extends Fragment {
 
 	private ArrayList<TestData> getDataSet() {
 		Bitmap imageArrow = BitmapFactory.decodeResource(this.getResources(),
-				R.drawable.arrow_down);
+				R.drawable.ic_action_arrow_right);
 
 		ArrayList<TestData> testData = new ArrayList<TestData>();
 		ArrayList<TestResult> testResult = new ArrayList<TestResult>();

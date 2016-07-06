@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/spinnerLayout"
+    style="?android:attr/spinnerItemStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/horizontal_divider"
+    android:drawableRight="@drawable/ic_action_arrow_right"
+    android:gravity="left|bottom"
+    android:text="dsfdsf"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:textColor="@color/colorPrimary" />
+
+<!-- android:minHeight="?android:attr/listPreferredItemHeight" -->

@@ -5,9 +5,9 @@
 <!--         android:id="@+id/overflow_add" -->
 <!--         android:icon="@drawable/ic_action_add" -->
 <!--         android:title="add"/> -->
-    <item
-        android:id="@+id/overflow_delete"
-        android:icon="@drawable/ic_action_minus"
-        android:title="remove"/>
+<!--     <item -->
+<!--         android:id="@+id/overflow_delete" -->
+<!--         android:icon="@drawable/ic_action_minus" -->
+<!--         android:title="remove"/> -->
         
 </menu>

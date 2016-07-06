@@ -58,7 +58,7 @@
             android:layout_below="@+id/user_roll_no"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/header_logo"
-            android:src="@drawable/ic_action_phone" />
+            android:src="@drawable/ic_smartphone" />
 
         <TextView
             android:id="@+id/tvMobile"

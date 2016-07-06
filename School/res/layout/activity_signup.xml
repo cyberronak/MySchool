@@ -28,7 +28,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="14dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/logo1" />
+            android:src="@drawable/splash_logo" />
 
         <!-- Firstname Label -->
 

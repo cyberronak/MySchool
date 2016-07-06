@@ -404,13 +404,13 @@ public class CalendarView  extends LinearLayout {
 		PopupMenu popupMenu = new PopupMenu(mContext, v);
 		popupMenu.inflate(R.menu.overflow_menu);
 		menuItemDate = date;
-		popupMenu.getMenu().removeItem(R.id.overflow_delete);
-		for (CalendarData calObj : CalendarData.events) {
-			if (ConstantUtility.dateCompare(calObj.getEventDate(), date)) {
-				popupMenu.getMenu().add(1, R.id.overflow_delete, 1, "remove");
-				break;
-			}
-		}
+//		popupMenu.getMenu().removeItem(R.id.overflow_delete);
+//		for (CalendarData calObj : CalendarData.events) {
+//			if (ConstantUtility.dateCompare(calObj.getEventDate(), date)) {
+//				popupMenu.getMenu().add(1, R.id.overflow_delete, 1, "remove");
+//				break;
+//			}
+//		}
 		// Force icons to show
 		Object menuHelper;
 		Class[] argTypes;

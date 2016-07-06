@@ -12,7 +12,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/arrow_right" />
+        android:src="@drawable/ic_action_arrow_right" />
 
     <LinearLayout
         android:layout_width="match_parent"

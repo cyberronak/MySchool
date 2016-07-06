@@ -22,7 +22,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/pin" />
+                android:background="@drawable/ic_pin" />
 
             <TextView
                 android:id="@+id/lbl_address"
@@ -60,7 +60,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/mail" />
+                android:background="@drawable/ic_mail" />
 
             <TextView
                 android:id="@+id/lbl_email"
@@ -98,7 +98,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/call" />
+                android:background="@drawable/ic_call" />
 
             <TextView
                 android:id="@+id/lbl_contact"
@@ -136,7 +136,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/description" />
+                android:background="@drawable/ic_description" />
 
             <TextView
                 android:id="@+id/lbl_desc"
