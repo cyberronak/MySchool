@@ -55,7 +55,11 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />
-        
+        <activity
+            android:name="com.example.school.RankActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
 <!--         <activity -->
 <!--             android:name="com.example.controller.ContactDetailsActivity" -->
 <!--             android:configChanges="orientation" -->

@@ -60,8 +60,7 @@ public class MainActivity extends AppCompatActivity implements
 		toolbarTitle.setTypeface(_customFontB);
 		
 		setSupportActionBar(toolbar);
-		getSupportActionBar().setDisplayShowHomeEnabled(true);
-
+		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		drawerFragment = (FragmentDrawer) getSupportFragmentManager()
 				.findFragmentById(R.id.fragment_navigation_drawer);
 		drawerFragment.setUp(R.id.fragment_navigation_drawer,

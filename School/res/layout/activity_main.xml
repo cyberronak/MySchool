@@ -6,36 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.school.MainActivity" >
 
-    <android.support.design.widget.CoordinatorLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll|enterAlways"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
-
-                <TextView
-                    android:id="@+id/toolbar_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="25dp"
-                    android:gravity="center_horizontal"
-                    android:text="@string/splash_app_name"
-                    android:textColor="@android:color/white"
-                    android:textAppearance="@android:style/TextAppearance.Large" />
-            </android.support.v7.widget.Toolbar>
-        </android.support.design.widget.AppBarLayout>
-    </android.support.design.widget.CoordinatorLayout>
+    <include layout="@layout/toolbar_view" />
 
     <FrameLayout
         android:id="@+id/container_body"

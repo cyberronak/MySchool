@@ -1,33 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:layout_marginTop="?attr/actionBarSize"
-    android:background="@android:color/white"
-    android:orientation="vertical" >
+    android:fitsSystemWindows="true" >
 
-    <TextView
-        android:id="@+id/label"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="100dp"
-        android:gravity="center_horizontal"
-        android:text="LEADERBOARD"
-        android:textColor="@color/colorPrimary"
-        android:textSize="45dp"
-        android:textStyle="bold" />
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="35dp" >
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/label"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="10dp"
-        android:gravity="center_horizontal"
-        android:text="Edit fragment_leaderboard.xml to change the appearance"
-        android:textColor="@color/colorPrimary"
-        android:textSize="12dp" />
+        <!-- Spinner Dropdown-1 -->
 
-</RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="3dp"
+            android:background="@drawable/editbox_style"
+            android:orientation="horizontal" >
+
+            <Spinner
+                android:id="@+id/sp_test_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:gravity="center" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            android:weightSum="2" >
+
+            <Button
+                android:id="@+id/btn_rank"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="@string/btn_rank"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/btn_subject"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="@string/btn_subject"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
