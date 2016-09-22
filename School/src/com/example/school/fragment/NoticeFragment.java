@@ -1,17 +1,33 @@
 package com.example.school.fragment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.http.NameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.example.school.MainActivity;
 import com.example.school.R;
+import com.example.school.Handler.UserDataHandler;
+import com.example.school.adapter.MySpinnerAdapter;
 import com.example.school.adapter.NoticeAdapter;
+import com.example.school.connection.AsyncInterface;
 import com.example.school.model.NoticeData;
+import com.example.school.model.StateData;
 import com.example.school.model.TestData;
 import com.example.school.utility.ConstantUtility;
+import com.example.school.utility.StringConst;
+import com.example.school.webservice.WebService;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -38,8 +54,9 @@ import android.widget.Toast;
 public class NoticeFragment extends Fragment {
 
 	private Typeface _customFontR, _customFontB;
-	private ArrayList<NoticeData> arrayOfUsers;
-
+	private ArrayList<NoticeData> arrayOfNotice;
+	private SharedPreferences shpref;
+	private ListView listView;
 	public NoticeFragment() {
 		// Required empty public constructor
 	}
@@ -59,41 +76,82 @@ public class NoticeFragment extends Fragment {
 		_customFontB = Typeface.createFromAsset(getActivity().getAssets(),
 				"fonts/American_Typewriter_Bold.ttf");
 
+		shpref = getActivity().getSharedPreferences(StringConst.My_PREFERENCES,
+				Context.MODE_PRIVATE);
+		
+		int schoolId = shpref.getInt(StringConst.MY_SCHOOL_ID, 0);
+		
+		UserDataHandler handler = new UserDataHandler();
+		ArrayList<NameValuePair> valuePairs = handler.getNoticeData(String.valueOf(schoolId));
+
+		WebService service = new WebService(getActivity(),
+				StringConst.SCHOOL_NOTICE, valuePairs);
+		service.mListener = interfaceListener;
+		service.execute();
+		
 		View rootView = inflater.inflate(R.layout.fragment_notice, container,
 				false);
-		arrayOfUsers = new ArrayList<NoticeData>();
-		arrayOfUsers.add(new NoticeData(NoticeData.ANNOUNCEMENT_TYPE.NEWS,
-				"Admission cut-off list",
-				"Admission 2016 cut-off list available",
-				"Admission 2016 cut-off list available on  noticeboard",
-				"2016-06-12 12:30:00"));
-		arrayOfUsers.add(new NoticeData(NoticeData.ANNOUNCEMENT_TYPE.NEWS,
-				"Notice for school fees", "School fees submission 2016",
-				"School fees submission 2016 scheduled on 1st July 2016.",
-				"2016-06-19 11:30:00"));
-		arrayOfUsers
-				.add(new NoticeData(
-						NoticeData.ANNOUNCEMENT_TYPE.EVENTS,
-						"Cricket tournament 2016",
-						"Cricket tournament 2016 fourm filling",
-						"Cricket tournament 2016 fourm filling started on 10:30 Am at student section",
-						"2016-06-22 10:30:00"));
-		arrayOfUsers.add(new NoticeData(NoticeData.ANNOUNCEMENT_TYPE.EXAMS,
-				"Mid-Exam-2016",
-				"Mid-Exam-2016 scheduled availble on notice board",
-				"Mid-Exam-2016 scheduled started from 2nd week on July 2016",
-				"2016-06-20 11:30:00"));
-		// Create the adapter to convert the array to views
-		NoticeAdapter adapter = new NoticeAdapter(getActivity(), arrayOfUsers);
-		// Attach the adapter to a ListView
-		ListView listView = (ListView) rootView
+
+		listView = (ListView) rootView
 				.findViewById(R.id.notice_list_view);
-		listView.setAdapter(adapter);
-		listView.setOnItemClickListener(mListener);
-		// Inflate the layout for this fragment
 		return rootView;
 	}
 
+	AsyncInterface interfaceListener = new AsyncInterface() {
+		
+		@Override
+		public void asyncResult(Object result, String flag) {
+			// TODO Auto-generated method stub
+			if (flag.equals(StringConst.CONNECTION)) {
+				if ((Boolean) result == true) {
+
+				} else {
+					Toast.makeText(getActivity(), StringConst.ERROR_ON_NETWORK,
+							Toast.LENGTH_LONG).show();
+				}
+			} else if (flag.equals(StringConst.SCHOOL_NOTICE)) {
+				String finalResult = (String) result;
+				JSONObject json_data;
+				try {
+					json_data = new JSONObject(finalResult);
+					String code = (json_data
+							.getString(StringConst.RESPONSE_CODE));
+					if (Integer.parseInt(code) == 200) {
+						
+						JSONArray notice_array = json_data.getJSONArray(StringConst.JSON_DATA);
+
+						arrayOfNotice = new ArrayList<NoticeData>();
+
+						
+						for (int i = 0; i < notice_array.length(); i++) {
+							JSONObject notice_data = notice_array.getJSONObject(i);
+							
+							String noticeSub = notice_data.getString(StringConst.NOTICE_SUB);
+							String noticeDate = notice_data.getString(StringConst.NOTICE_DATE);
+							String noticeDesc = notice_data.getString(StringConst.NOTICE);
+
+							arrayOfNotice.add(new NoticeData(
+									NoticeData.ANNOUNCEMENT_TYPE.NEWS,
+									noticeSub, noticeDesc, noticeDesc,
+									noticeDate));
+						}
+						
+						// Create the adapter to convert the array to views
+						NoticeAdapter adapter = new NoticeAdapter(getActivity(), arrayOfNotice);
+						// Attach the adapter to a ListView
+
+						listView.setAdapter(adapter);
+						listView.setOnItemClickListener(mListener);
+						// Inflate the layout for this fragment
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} 
+		}
+	};
+	
 	OnItemClickListener mListener = new AdapterView.OnItemClickListener() {
 
 		@Override
@@ -129,9 +187,9 @@ public class NoticeFragment extends Fragment {
 			tvSubTitle.setPadding(0, 0, 0, 30);
 
 			// Populate the data into the view using the data object
-			tvTitle.setText(arrayOfUsers.get(position).getTitle());
-			tvSubTitle.setText(arrayOfUsers.get(position).getSub_title());
-			tvDesc.setText(arrayOfUsers.get(position).getDesc());
+			tvTitle.setText(arrayOfNotice.get(position).getTitle());
+			tvSubTitle.setText(arrayOfNotice.get(position).getSub_title());
+			tvDesc.setText(arrayOfNotice.get(position).getDesc());
 
 			tvTitle.setGravity(Gravity.CENTER_HORIZONTAL);
 			tvSubTitle.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -147,28 +205,29 @@ public class NoticeFragment extends Fragment {
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 			params.setMargins(5, 5, 5, 5);
-			btnCancel.setBackgroundDrawable(getActivity().getResources().getDrawable(R.drawable.shadow_card));
+			btnCancel.setBackgroundDrawable(getActivity().getResources()
+					.getDrawable(R.drawable.shadow_card));
 			btnCancel.setText("Cancel");
 			btnCancel.setTextColor(Color.WHITE);
 			btnCancel.setLayoutParams(params);
 			btnCancel.setGravity(Gravity.CENTER_HORIZONTAL);
 			btnCancel.setTypeface(_customFontR);
 			diagLayout.addView(scroller);
-			diagLayout.addView(btnCancel);			
+			diagLayout.addView(btnCancel);
 			alertDialog.setView(diagLayout);
-			
-//			alertDialog.setPositiveButton("Cancel",
-//					new DialogInterface.OnClickListener() {
-//						@Override
-//						public void onClick(DialogInterface dialog, int which) {
-//							// positive button logic
-//
-//						}
-//					});
+
+			// alertDialog.setPositiveButton("Cancel",
+			// new DialogInterface.OnClickListener() {
+			// @Override
+			// public void onClick(DialogInterface dialog, int which) {
+			// // positive button logic
+			//
+			// }
+			// });
 
 			final AlertDialog dialog = alertDialog.create();
 			btnCancel.setOnClickListener(new View.OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub

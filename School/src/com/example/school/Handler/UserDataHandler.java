@@ -18,11 +18,19 @@ public class UserDataHandler
 	}
 
 	// Login Authentication
-	public ArrayList<NameValuePair> loginUser(String username, String password)
+	public ArrayList<NameValuePair> loginUser(String id, String username, String password)
 	{
-		nameValuePairs.add(new BasicNameValuePair(StringConst.Flag, StringConst.SIGN_IN));
-		nameValuePairs.add(new BasicNameValuePair(StringConst.EMAIL, username));
-		nameValuePairs.add(new BasicNameValuePair(StringConst.PASSWORD, password));
+		nameValuePairs.add(new BasicNameValuePair(StringConst.ID_PARAM, id));
+		nameValuePairs.add(new BasicNameValuePair(StringConst.UNAME_PARAM, username));
+		nameValuePairs.add(new BasicNameValuePair(StringConst.PASSWORD_PARAM, password));
+		return nameValuePairs;
+	}
+	
+	// Forgot Password
+	public ArrayList<NameValuePair> forgotPassword(String id, String username)
+	{
+		nameValuePairs.add(new BasicNameValuePair(StringConst.ID_PARAM, id));
+		nameValuePairs.add(new BasicNameValuePair(StringConst.UNAME_PARAM, username));
 		return nameValuePairs;
 	}
 	
@@ -37,4 +45,17 @@ public class UserDataHandler
 		nameValuePairs.add(new BasicNameValuePair(StringConst.PASSWORD, password));
 		return nameValuePairs;
 	}
+
+	public ArrayList<NameValuePair> getNoticeData(String id) {
+		// TODO Auto-generated method stub
+		nameValuePairs.add(new BasicNameValuePair(StringConst.ID_PARAM, id));
+		return nameValuePairs;
+	}
+	
+	public ArrayList<NameValuePair> getSchoolInfo(String id) {
+		// TODO Auto-generated method stub
+		nameValuePairs.add(new BasicNameValuePair(StringConst.ID_PARAM, id));
+		return nameValuePairs;
+	}
+	
 }

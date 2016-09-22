@@ -53,7 +53,7 @@ public class WebService extends AsyncTask<String, Void, String>
 			HttpResponse response = httpclient.execute(httppost);
 			HttpEntity entity = response.getEntity();
 			is = entity.getContent();
-			Log.e("pass 1", "connection success ");
+			Log.i("pass 1", "connection success to URL= " + httppost.getURI());
 		}
 		catch (Exception e)
 		{
@@ -71,7 +71,7 @@ public class WebService extends AsyncTask<String, Void, String>
 			}
 			is.close();
 			result = sb.toString();
-			Log.e("pass 2", "connection success ");
+			Log.i("pass 2", "connection success to getting result doInBackground");
 			return result;
 		}
 		catch (Exception e)
@@ -90,10 +90,10 @@ public class WebService extends AsyncTask<String, Void, String>
 		{
 			if (result != null)
 			{
-				Log.e("pass 2", "all data get");
+				Log.i("pass 2", "all data get");
 				if(!result.contains(StringConst.ERROR_ON_NETWORK))
 				{
-					Log.e("result", result);
+					Log.i("result", result);
 					Object obj = result;
 					mListener.asyncResult(obj, mFlag);					
 				}
@@ -107,7 +107,7 @@ public class WebService extends AsyncTask<String, Void, String>
 		}
 		catch (Exception e)
 		{
-			Log.e("Fail 3", e.toString());
+			Log.i("Fail 3", e.toString());
 		}
 	}
 }

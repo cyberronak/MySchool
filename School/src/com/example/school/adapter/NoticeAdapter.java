@@ -50,9 +50,9 @@ public class NoticeAdapter extends ArrayAdapter<NoticeData> {
         tvDate.setTypeface(_customFontR);
         
         // Populate the data into the view using the data object
-        tvTitle.setText(data.getTitle());
+        tvTitle.setText(ConstantUtility.toCamelCase(data.getTitle()));
         tvSubTitle.setText(data.getSub_title());
-        tvDate.setText(ConstantUtility.getDateFormDate(data.getDate()));
+        tvDate.setText(data.getDate());
 
         // Return the completed view to render on screen
         return convertView;

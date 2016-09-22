@@ -3,13 +3,17 @@ package com.example.school;
 import java.util.ArrayList;
 
 import org.apache.http.NameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.example.school.Handler.UserDataHandler;
 import com.example.school.connection.AsyncInterface;
 import com.example.school.model.CalendarData;
+import com.example.school.model.StateData;
 import com.example.school.model.CalendarData.EventType;
+import com.example.school.model.StudentData;
+import com.example.school.utility.ConstantUtility;
 import com.example.school.utility.StringConst;
 import com.example.school.webservice.WebService;
 
@@ -39,6 +43,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncInterface {
 	private TextView _title, _forgotLink;
 	private String email, password;
 	private Typeface _customFontR, _customFontB;
+	private AlertDialog forgotDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,13 +74,13 @@ public class LoginActivity extends AppCompatActivity implements AsyncInterface {
 
 		_shpref = getSharedPreferences(StringConst.My_PREFERENCES,
 				Context.MODE_PRIVATE);
-
+		final int cityId = _shpref.getInt(StringConst.MY_SCHOOL_ID, 0);
 		_loginButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// login();
-				if (!validate()) {
+				if (!validate() || cityId == 0) {
 					onLoginFailed();
 					return;
 				}
@@ -87,22 +92,17 @@ public class LoginActivity extends AppCompatActivity implements AsyncInterface {
 				_pDialog.show();
 
 				_loginButton.setEnabled(false);
-				Intent upanel = new Intent(getApplicationContext(),
-						MainActivity.class);
-				upanel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(upanel);
-				onLoginSuccess();
 
-//				UserDataHandler handler = new UserDataHandler();
-//				ArrayList<NameValuePair> valuePairs = handler.loginUser(email,
-//						password);
-//
-//				_loginButton.setEnabled(false);
-//
-//				WebService service = new WebService(getApplicationContext(),
-//						StringConst.SIGN_IN, valuePairs);
-//				service.mListener = LoginActivity.this;
-//				service.execute();
+				UserDataHandler handler = new UserDataHandler();
+				ArrayList<NameValuePair> valuePairs = handler.loginUser(
+						String.valueOf(cityId), email, password);
+
+				_loginButton.setEnabled(false);
+
+				WebService service = new WebService(getApplicationContext(),
+						StringConst.STUDENT_LOGIN, valuePairs);
+				service.mListener = LoginActivity.this;
+				service.execute();
 			}
 		});
 
@@ -142,11 +142,11 @@ public class LoginActivity extends AppCompatActivity implements AsyncInterface {
 							}
 						});
 
-				final AlertDialog dialog = builder.create();
+				forgotDialog = builder.create();
 				// display dialog
-				dialog.show();
+				forgotDialog.show();
 
-				dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+				forgotDialog.getButton(AlertDialog.BUTTON_POSITIVE)
 						.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
@@ -155,21 +155,31 @@ public class LoginActivity extends AppCompatActivity implements AsyncInterface {
 								String forgotemail = _forgotemail.getText()
 										.toString();
 								if (forgotemail.isEmpty()
-										|| !android.util.Patterns.EMAIL_ADDRESS
-												.matcher(forgotemail).matches()) {
+										|| !(android.util.Patterns.EMAIL_ADDRESS
+												.matcher(forgotemail).matches()
+										|| ConstantUtility.validateMobileNo(forgotemail.toString()))) {
 									_forgotemail
-											.setError(StringConst.VALID_EMAIL);
+											.setError(StringConst.VALID_EMAIL_PHONE);
 									return;
 								} else {
 									_forgotemail.setError(null);
 								}
 
-								Toast.makeText(
-										getApplicationContext(),
-										"Successfully password updation link sent to your mail...",
-										Toast.LENGTH_SHORT).show();
+								// Toast.makeText(
+								// getApplicationContext(),
+								// "Successfully password updation link sent to your mail...",
+								// Toast.LENGTH_SHORT).show();
 
-								dialog.dismiss();
+								UserDataHandler handler = new UserDataHandler();
+								ArrayList<NameValuePair> valuePairs = handler
+										.forgotPassword(String.valueOf(cityId),
+												forgotemail);
+
+								WebService service = new WebService(
+										getApplicationContext(),
+										StringConst.FORGOT_PW, valuePairs);
+								service.mListener = LoginActivity.this;
+								service.execute();
 							}
 						});
 			}
@@ -206,9 +216,10 @@ public class LoginActivity extends AppCompatActivity implements AsyncInterface {
 		password = passwordText.getText().toString();
 
 		if (email.isEmpty()
-				|| !android.util.Patterns.EMAIL_ADDRESS.matcher(email)
-						.matches()) {
-			emailText.setError(StringConst.VALID_EMAIL);
+				|| ! (android.util.Patterns.EMAIL_ADDRESS.matcher(email)
+						.matches()
+				|| ConstantUtility.validateMobileNo(email.toString()))) {
+			emailText.setError(StringConst.VALID_EMAIL_PHONE);
 			valid = false;
 		} else {
 			emailText.setError(null);
@@ -236,34 +247,51 @@ public class LoginActivity extends AppCompatActivity implements AsyncInterface {
 				_loginButton.setEnabled(true);
 				_pDialog.cancel();
 			}
-		} else if (flag.equals(StringConst.SIGN_IN)) {
+		} else if (flag.equals(StringConst.STUDENT_LOGIN)) {
 			String finalResult = (String) result;
 			JSONObject json_data;
 			try {
 				json_data = new JSONObject(finalResult);
-				String success = (json_data
-						.getString(StringConst.RESPONSE_SUCCESS));
-				if (Integer.parseInt(success) == 1) {
-					Toast.makeText(this, StringConst.SUCCESS_SIGN_IN,
-							Toast.LENGTH_SHORT).show();
+				String code = (json_data.getString(StringConst.RESPONSE_CODE));
+				if (Integer.parseInt(code) == 200) {
 
-					JSONObject json_user = json_data
-							.getJSONObject(StringConst.USER_DATA);
+//					Toast.makeText(this, StringConst.SUCCESS_LOGIN,
+//							Toast.LENGTH_SHORT).show();
+
+					JSONArray login_array = json_data.getJSONArray(StringConst.JSON_DATA);
+					JSONObject login_data = login_array.getJSONObject(0);
+
+					int studentId = Integer.parseInt(login_data.getString(StringConst.STUDENT_ID));
+					String rollNo = login_data.getString(StringConst.STUDENT_ROLL_NO);
+					String firstName = login_data.getString(StringConst.STUDENT_FNAME);
+					String lastName = login_data.getString(StringConst.STUDENT_LNAME);
+					String email = login_data.getString(StringConst.STUDENT_EMAIL);
+					String mobileNo = login_data.getString(StringConst.STUDENT_MOBILE_NO);
+					String dob = login_data.getString(StringConst.STUDENT_DOB);
+					String image = login_data.getString(StringConst.STUDENT_IMAGE);
+			
+//					StudentData.getInstance().setId(studentId);
+//					StudentData.getInstance().setRollno(rollNo);					
+//					StudentData.getInstance().setFistname(firstName);
+//					StudentData.getInstance().setLastname(lastName);
+//					StudentData.getInstance().setEmail(email);
+//					StudentData.getInstance().setMobileno(mobileNo);
+//					StudentData.getInstance().setDob(dob);
+//					StudentData.getInstance().setImage(image);
+					
 					_shpref = getSharedPreferences(StringConst.My_PREFERENCES,
 							Context.MODE_PRIVATE);
 
 					SharedPreferences.Editor editor = _shpref.edit();
 
-					editor.putString(StringConst.FIRSTNAME,
-							json_user.getString(StringConst.FIRSTNAME));
-					editor.putString(StringConst.LASTNAME,
-							json_user.getString(StringConst.LASTNAME));
-					editor.putString(StringConst.EMAIL,
-							json_user.getString(StringConst.EMAIL));
-					editor.putString(StringConst.USERNAME,
-							json_user.getString(StringConst.USERNAME));
-					editor.putString(StringConst.CREATED_AT,
-							json_user.getString(StringConst.CREATED_AT));
+					editor.putInt(StringConst.STUDENT_ID,studentId);
+					editor.putString(StringConst.STUDENT_ROLL_NO,rollNo);
+					editor.putString(StringConst.STUDENT_FNAME,firstName);
+					editor.putString(StringConst.STUDENT_LNAME,lastName);
+					editor.putString(StringConst.STUDENT_EMAIL,email);
+					editor.putString(StringConst.STUDENT_MOBILE_NO,mobileNo);
+					editor.putString(StringConst.STUDENT_DOB,dob);
+					editor.putString(StringConst.STUDENT_IMAGE,image);
 					editor.commit();
 
 					Intent upanel = new Intent(getApplicationContext(),
@@ -276,6 +304,33 @@ public class LoginActivity extends AppCompatActivity implements AsyncInterface {
 							Toast.LENGTH_SHORT).show();
 					_loginButton.setEnabled(true);
 					_pDialog.cancel();
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (flag.equals(StringConst.FORGOT_PW)) {
+			String finalResult = (String) result;
+			JSONObject json_data;
+			try {
+				json_data = new JSONObject(finalResult);
+				String code = (json_data.getString(StringConst.RESPONSE_CODE));
+				if (Integer.parseInt(code) == 200) {
+
+					String response_data = (json_data
+							.getString(StringConst.JSON_DATA));
+
+					Toast.makeText(this, response_data, Toast.LENGTH_SHORT)
+							.show();
+					forgotDialog.dismiss();
+				} else {
+					String response_data = (json_data
+							.getString(StringConst.JSON_DATA));
+					if(response_data !=null && response_data.length()>0)
+						Toast.makeText(this, response_data,	Toast.LENGTH_SHORT).show();
+					else
+						Toast.makeText(this, StringConst.NO_RESOURCE_FOUND,	Toast.LENGTH_SHORT).show();					
+					forgotDialog.dismiss();
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block

@@ -3,6 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="115dp"
     android:layout_margin="5dp"
+    android:background="@drawable/horizontal_divider"
     android:padding="8dp" >
 
     <ImageView

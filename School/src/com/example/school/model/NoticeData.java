@@ -21,7 +21,7 @@ public class NoticeData {
 		this.sub_title=sub_title;
 		this.desc=desc;
 		this.date=date;
-}
+	}
 	
 	public ANNOUNCEMENT_TYPE getType() {
 		return type;

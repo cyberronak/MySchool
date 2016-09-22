@@ -4,29 +4,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include layout="@layout/toolbar_view" />
-    
-    <TextView
-        android:id="@+id/label"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="100dp"
-        android:gravity="center_horizontal"
-        android:text="Rank"
-        android:textColor="@color/colorPrimary"
-        android:textSize="45dp"
-        android:textStyle="bold" />
+    <include
+        android:id="@+id/rank_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        layout="@layout/toolbar_view" />
 
-    <TextView
-        android:layout_width="fill_parent"
+    <ListView
+        android:id="@+id/leader_list_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/label"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="10dp"
-        android:gravity="center_horizontal"
-        android:text="Edit activity_rank.xml to change the appearance"
-        android:textColor="@color/colorPrimary"
-        android:textSize="12dp" />
+        android:layout_below="@+id/rank_toolbar"
+        android:layout_centerHorizontal="true"
+        android:divider="@null" >
+    </ListView>
+    
 
 </RelativeLayout>

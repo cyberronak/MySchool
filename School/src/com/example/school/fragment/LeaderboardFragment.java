@@ -72,11 +72,18 @@ public class LeaderboardFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(getActivity(), RankActivity.class);
-				startActivity(intent);
-				// closing transition animations
-				getActivity().overridePendingTransition(R.anim.slide_in_left,
-						R.anim.slide_out_right);
+				if (_spinnerTestList.getSelectedItemPosition() != 0) {
+					Intent intent = new Intent(getActivity(),
+							RankActivity.class);
+					intent.putExtra("RankActivityTitle", "Rank");
+					startActivity(intent);
+					// closing transition animations
+					getActivity().overridePendingTransition(
+							R.anim.slide_in_left, R.anim.slide_out_right);
+				} else
+					Toast.makeText(getContext(),
+							"First please select dropdown value",
+							Toast.LENGTH_SHORT).show();
 			}
 		});
 
@@ -86,26 +93,26 @@ public class LeaderboardFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				 TextView tvTitle = new TextView(getContext());
-				
-				 tvTitle.setBackgroundColor(getActivity().getResources()
-				 .getColor(R.color.colorPrimaryDark));
-				 tvTitle.setText(R.string.title_subject);
-				 tvTitle.setTextSize(22);
-				 tvTitle.setTextColor(Color.WHITE);
-				 tvTitle.setGravity(Gravity.CENTER);
-				 tvTitle.setTypeface(_customFontB);
-				 tvTitle.setPadding(0, 20, 0, 20);
-				
+
+				TextView tvTitle = new TextView(getContext());
+
+				tvTitle.setBackgroundColor(getActivity().getResources()
+						.getColor(R.color.colorPrimaryDark));
+				tvTitle.setText(R.string.title_subject);
+				tvTitle.setTextSize(22);
+				tvTitle.setTextColor(Color.WHITE);
+				tvTitle.setGravity(Gravity.CENTER);
+				tvTitle.setTypeface(_customFontB);
+				tvTitle.setPadding(0, 20, 0, 20);
+
 				AlertDialog.Builder alertDialog = new AlertDialog.Builder(
 						getContext());
 				alertDialog.setCustomTitle(tvTitle);
-				List<String> listData= Arrays.asList(subjectList);
-				
-				MySpinnerAdapter arrayAdapter = new MySpinnerAdapter(getActivity(),
-						R.layout.subject_dialog_row, listData);
-				
+				List<String> listData = Arrays.asList(subjectList);
+
+				MySpinnerAdapter arrayAdapter = new MySpinnerAdapter(
+						getActivity(), R.layout.subject_dialog_row, listData);
+
 				alertDialog.setAdapter(arrayAdapter, alertDialogListener);
 				// LinearLayout diagLayout = new LinearLayout(getContext());
 				// diagLayout.setOrientation(LinearLayout.VERTICAL);
@@ -218,18 +225,31 @@ public class LeaderboardFragment extends Fragment {
 		}
 	};
 
-	DialogInterface.OnClickListener alertDialogListener= new DialogInterface.OnClickListener() {
+	DialogInterface.OnClickListener alertDialogListener = new DialogInterface.OnClickListener() {
 
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
 			// TODO Auto-generated method stub
-			Toast.makeText(getContext(), subjectList[which], Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent(getActivity(), RankActivity.class);
+			intent.putExtra("RankActivityTitle", subjectList[which]);
+			startActivity(intent);
+			// closing transition animations
+			getActivity().overridePendingTransition(R.anim.slide_in_left,
+					R.anim.slide_out_right);
+
+			// Toast.makeText(getContext(), subjectList[which],
+			// Toast.LENGTH_SHORT).show();
 		}
 	};
-	
+
 	private void setInitTestList() {
 		// TODO Auto-generated method stub
 		List<String> testList = new ArrayList<String>();
+		testList.add("Select Test Data");
+		testList.add("Test-1");
+		testList.add("Test-2");
+		testList.add("Test-3");
+		testList.add("Test-4");
 
 		MySpinnerAdapter stateAdapter = new MySpinnerAdapter(getContext(),
 				R.layout.spinner_layout, testList);

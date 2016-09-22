@@ -6,13 +6,13 @@
     <RelativeLayout
         android:id="@+id/nav_header_container"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="110dp"
         android:layout_alignParentTop="true" >
 
         <ImageView
-            android:id="@+id/header_logo"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:id="@+id/user_logo"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/header_logo"
+            android:layout_toRightOf="@+id/user_logo"
             android:ellipsize="end"
             android:maxLines="1"
             android:paddingTop="10dp"
@@ -43,7 +43,7 @@
             android:layout_below="@+id/user_title"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:layout_toRightOf="@+id/header_logo"
+            android:layout_toRightOf="@+id/user_logo"
             android:ellipsize="end"
             android:maxLines="1"
             android:singleLine="true"
@@ -51,26 +51,18 @@
             android:textColor="@android:color/white"
             android:textSize="15dp" />
 
-        <ImageView
-            android:id="@+id/ivMobile"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_below="@+id/user_roll_no"
-            android:layout_marginTop="5dp"
-            android:layout_toRightOf="@+id/header_logo"
-            android:src="@drawable/ic_smartphone" />
 
         <TextView
-            android:id="@+id/tvMobile"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:id="@+id/user_mobile_no"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
             android:layout_below="@+id/user_roll_no"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_centerInParent="true"
-            android:layout_alignBaseline="@+id/ivMobile"
-            android:layout_toRightOf="@+id/ivMobile"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/user_logo"
             android:text="item_title"
+            android:drawableLeft="@drawable/ic_smartphone"
+            android:drawablePadding="0dp"
             android:textColor="@android:color/white"
             android:textSize="15dp" />
     </RelativeLayout>

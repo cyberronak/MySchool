@@ -136,11 +136,50 @@ public class TestFragment extends Fragment {
 		TestData.tblList.add(createTableLayout(2, 3, td));
 		testData.add(td);
 
-		td = new TestData("Test-2", "65", testResult, imageArrow);
-		TestData.tblList.add(createTableLayout(2, 3, td));
+		testResult.clear();
+		rs = new TestResult("Physics", "100", "55");
+		testResult.add(rs);
+		rs = new TestResult("Chemistry", "100", "89");
+		testResult.add(rs);
+
+		td  = new TestData("Test-2", "65", testResult, imageArrow);
+		// Create table having 3 args => row, column and test data
+		// here we pass row as nuber of subject count-->[testResult size]
+		// fixed 3 column Subject marks and total marks 
+		TestData.tblList.add(createTableLayout(testResult.size(), 3, td));
 		testData.add(td);
 
+		testResult.clear();
+		rs = new TestResult("Physics", "100", "55");
+		testResult.add(rs);
+		rs = new TestResult("Chemistry", "100", "89");
+		testResult.add(rs);
+		rs = new TestResult("Maths", "100", "35");
+		testResult.add(rs);
+
+		td  = new TestData("Test-3", "115", testResult, imageArrow);
+		TestData.tblList.add(createTableLayout(testResult.size(), 3, td));
+		testData.add(td);
+
+		testResult.clear();
+		rs = new TestResult("Physics", "100", "82");
+		testResult.add(rs);
+		rs = new TestResult("Chemistry", "100", "94");
+		testResult.add(rs);
+		rs = new TestResult("Maths", "100", "87");
+		testResult.add(rs);
+
+		td  = new TestData("Test-4", "22", testResult, imageArrow);
+		TestData.tblList.add(createTableLayout(testResult.size(), 3, td));
+		testData.add(td);
+		
 		return testData;
+	}
+
+	private void clearTotalMarks()
+	{
+		totalMarks=0;
+		marks=0;		
 	}
 
 	/**
@@ -176,6 +215,7 @@ public class TestFragment extends Fragment {
 		tableLayout.addView(addTableRow(-1, "Rank", td.getRank(), "",
 				isExtraRow));
 
+		clearTotalMarks();
 		return tableLayout;
 	}
 
@@ -240,7 +280,6 @@ public class TestFragment extends Fragment {
 		a.setLayoutParams(aParams);
 		b.setLayoutParams(bParams);
 		c.setLayoutParams(cParams);
-
 
 		// SET PADDING
 		a.setPadding(20, 20, 20, 20);

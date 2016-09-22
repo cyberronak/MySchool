@@ -196,7 +196,7 @@ public class SignupActivity extends AppCompatActivity implements AsyncInterface 
 				String error = (json_data.getString(StringConst.RESPONSE_ERROR));
 				if (Integer.parseInt(success) == 1) {
 					JSONObject json_user = json_data
-							.getJSONObject(StringConst.USER_DATA);
+							.getJSONObject(StringConst.JSON_DATA);
 					_shpref = getSharedPreferences(StringConst.My_PREFERENCES,
 							Context.MODE_PRIVATE);
 
@@ -225,7 +225,7 @@ public class SignupActivity extends AppCompatActivity implements AsyncInterface 
 				} else if (Integer.parseInt(error) == 3) {
 					_signupButton.setEnabled(true);
 					_pDialog.cancel();
-					Toast.makeText(this, StringConst.VALID_EMAIL,
+					Toast.makeText(this, StringConst.VALID_EMAIL_PHONE,
 							Toast.LENGTH_SHORT).show();
 				} else {
 					_signupButton.setEnabled(true);

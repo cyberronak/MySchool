@@ -51,7 +51,7 @@ public class TopicFragment extends Fragment {
 	int totalMarks = 0;
 	double percentage = 0;
 	boolean isExtraRow = true;
-
+	
 	public TopicFragment() {
 		// Required empty public constructor
 	}
@@ -127,26 +127,75 @@ public class TopicFragment extends Fragment {
 		ArrayList<TestData> testData = new ArrayList<TestData>();
 		ArrayList<TestResult> testResult = new ArrayList<TestResult>();
 
-		TestResult rs = new TestResult("Maths", "100", "69");
+		// here we have passing 3 args 1->subject, 2-> higest marks in exam and 3-> out of getting marks
+		TestResult rs = new TestResult("M1", "89", "69");
 		testResult.add(rs);
-		rs = new TestResult("English", "100", "49");
+		rs = new TestResult("M2", "76", "49");
 		testResult.add(rs);
-
-		TestData td = new TestData("Test-1", "5", testResult, imageArrow);
-		TestData.tblList.add(createTableLayout(2, 3, td));
+		rs = new TestResult("M2", "40", "40");
+		testResult.add(rs);
+		
+		TestData td = new TestData("Maths", "5", testResult, imageArrow);
+		TestData.tblList.add(createTopicTableLayout(testResult.size(), 4, td, 60));
 		testData.add(td);
 
-		td = new TestData("Test-2", "65", testResult, imageArrow);
-		TestData.tblList.add(createTableLayout(2, 3, td));
+		testResult.clear();
+		rs = new TestResult("P1", "89", "69");
+		testResult.add(rs);
+		rs = new TestResult("P2", "76", "49");
+		testResult.add(rs);
+		rs = new TestResult("P3", "40", "40");
+		testResult.add(rs);
+		td = new TestData("Physics", "65", testResult, imageArrow);
+		TestData.tblList.add(createTopicTableLayout(testResult.size(), 4, td, 75));
 		testData.add(td);
 
+		testResult.clear();
+		rs = new TestResult("Ch1", "89", "69");
+		testResult.add(rs);
+		rs = new TestResult("ChP2", "76", "49");
+		testResult.add(rs);
+		rs = new TestResult("ChP3", "40", "40");
+		testResult.add(rs);
+		td = new TestData("Chemistry", "65", testResult, imageArrow);
+		TestData.tblList.add(createTopicTableLayout(testResult.size(), 4, td, 63));
+		testData.add(td);
+
+		testResult.clear();
+		rs = new TestResult("E1", "89", "69");
+		testResult.add(rs);
+		rs = new TestResult("E2", "76", "49");
+		testResult.add(rs);
+		rs = new TestResult("E3", "40", "40");
+		testResult.add(rs);
+		td = new TestData("English", "65", testResult, imageArrow);
+		TestData.tblList.add(createTopicTableLayout(testResult.size(), 4, td, 84));
+		testData.add(td);
+
+		testResult.clear();
+		rs = new TestResult("Env1", "89", "69");
+		testResult.add(rs);
+		rs = new TestResult("Env2", "76", "49");
+		testResult.add(rs);
+		rs = new TestResult("Env3", "40", "40");
+		testResult.add(rs);
+		td = new TestData("Environment", "65", testResult, imageArrow);
+		TestData.tblList.add(createTopicTableLayout(testResult.size(), 4, td, 77));
+		testData.add(td);
+		
 		return testData;
+	}
+	
+	private void clearTotalMarks()
+	{
+		totalMarks=0;
+		marks=0;		
 	}
 
 	/**
 	 * Create TableLayout programmatically
 	 */
-	public TableLayout createTableLayout(int rows, int columns, TestData td) {
+	public TableLayout createTopicTableLayout(int rows, int columns, TestData td, int cutOfMarks) {
 
 		// CREATE TABLE
 		TableLayout tableLayout = new TableLayout(getActivity());
@@ -165,17 +214,10 @@ public class TopicFragment extends Fragment {
 
 			// ADD TABLEROW TO TABLELAYOUT
 			tableLayout.addView(addTableRow(x, rs.getSubject(),
-					rs.getSubjMark(), rs.getSubjTotal(), !isExtraRow));
+					rs.getSubjMark(), rs.getSubjTotal(), !isExtraRow, cutOfMarks));
 		}
 
-		// ADD FOOTER
-		tableLayout.addView(addTableRow(-1, "Total", String.valueOf(marks),
-				String.valueOf(totalMarks), isExtraRow));
-		tableLayout.addView(addTableRow(-1, "Percent(%)",
-				String.valueOf(marks / td.getResult().size()), "", isExtraRow));
-		tableLayout.addView(addTableRow(-1, "Rank", td.getRank(), "",
-				isExtraRow));
-
+		clearTotalMarks();
 		return tableLayout;
 	}
 
@@ -211,7 +253,7 @@ public class TopicFragment extends Fragment {
 	}
 
 	private TableRow addTableRow(int x, String col1Subj, String col1Marks,
-			String col1TotleMarks, boolean isExtraRow) {
+			String col1TotleMarks, boolean isExtraRow, int cutOfMarks) {
 		// CREATE TABLE ROW
 		TableRow tableRow = new TableRow(getActivity());
 
@@ -231,39 +273,49 @@ public class TopicFragment extends Fragment {
 		cParams.topMargin = 2;
 		cParams.rightMargin = 2;
 
+		TableRow.LayoutParams dParams = new TableRow.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		dParams.topMargin = 2;
+		dParams.rightMargin = 2;
+		
 		// CREATE TEXTVIEW
 		TextView a = new TextView(getActivity());
 		TextView b = new TextView(getActivity());
 		TextView c = new TextView(getActivity());
+		TextView d = new TextView(getActivity());
 
 		// SET PARAMS
 		a.setLayoutParams(aParams);
 		b.setLayoutParams(bParams);
 		c.setLayoutParams(cParams);
-
+		d.setLayoutParams(dParams);
 
 		// SET PADDING
 		a.setPadding(20, 20, 20, 20);
 		b.setPadding(20, 20, 20, 20);
 		c.setPadding(20, 20, 20, 20);
+		d.setPadding(20, 20, 20, 20);
 
 		// SET TEXTVIEW TEXT
 		if (x == 0) {
 			
 			// SET TEXT VALUE
-			a.setText("Subject");
-			b.setText("Marks");
-			c.setText("TotalMarks");
+			a.setText("Topic");
+			b.setText("CutOff");
+			c.setText("Higest");
+			d.setText("Marks");
 			
 			// SET TEXT COLOR
 			a.setTextColor(Color.WHITE);
 			b.setTextColor(Color.WHITE);
 			c.setTextColor(Color.WHITE);
+			d.setTextColor(Color.WHITE);
 			
 			// SET TEXT TYPEFACE
 			a.setTypeface(_customFontB);
 			b.setTypeface(_customFontB);
 			c.setTypeface(_customFontB);
+			d.setTypeface(_customFontB);
 
 			// SET TEXT BACKGROUND-COLOR
 			a.setBackgroundColor(getActivity().getResources().getColor(
@@ -272,18 +324,21 @@ public class TopicFragment extends Fragment {
 					R.color.colorPrimaryDark));
 			c.setBackgroundColor(getActivity().getResources().getColor(
 					R.color.colorPrimaryDark));
+			d.setBackgroundColor(getActivity().getResources().getColor(
+					R.color.colorPrimaryDark));
 		} else {
 			
 			// SET TEXT VALUE
-			String str = x > 0 ? String.valueOf(x) + ") " : "";
-			a.setText(str + col1Subj);
+			a.setText(col1Subj);
 			b.setText(col1Marks);
 			c.setText(col1TotleMarks);
-
+			d.setText(String.valueOf(cutOfMarks));
+			
 			// SET TEXT TYPEFACE
 			a.setTypeface(_customFontR);
 			b.setTypeface(_customFontR);
 			c.setTypeface(_customFontR);
+			d.setTypeface(_customFontR);
 
 			// SET TEXT COLOR
 			a.setTextColor(getActivity().getResources().getColor(
@@ -292,28 +347,33 @@ public class TopicFragment extends Fragment {
 					R.color.colorPrimaryDark));
 			c.setTextColor(getActivity().getResources().getColor(
 					R.color.colorPrimaryDark));
+			d.setTextColor(getActivity().getResources().getColor(
+					R.color.colorPrimaryDark));
 
 			// SET BACKGROUND COLOR
 			a.setBackgroundColor(Color.WHITE);
 			b.setBackgroundColor(Color.WHITE);
 			c.setBackgroundColor(Color.WHITE);
+			d.setBackgroundColor(Color.WHITE);
 			
 			// ADDED BORDER TO TABLEROW
 			a.setBackgroundResource(R.drawable.table_cell_boarder);
 			b.setBackgroundResource(R.drawable.table_cell_boarder);
 			c.setBackgroundResource(R.drawable.table_cell_boarder);
+			d.setBackgroundResource(R.drawable.table_cell_boarder);
 		}
 		
-		if(x > 0)
-		{
-			marks += Integer.parseInt(col1Marks);
-			totalMarks += Integer.parseInt(col1TotleMarks);			
-		}
+//		if(x > 0)
+//		{
+//			marks += Integer.parseInt(col1Marks);
+//			totalMarks += Integer.parseInt(col1TotleMarks);			
+//		}
 
 		// ADD TEXTVIEW TO TABLEROW
 		tableRow.addView(a);
 		tableRow.addView(b);
 		tableRow.addView(c);
+		tableRow.addView(d);
 
 		return tableRow;
 	}

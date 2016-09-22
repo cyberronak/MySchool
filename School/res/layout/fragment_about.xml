@@ -8,11 +8,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="120dp"
+            android:layout_height="wrap_content"
+            android:minHeight="120dp"
             android:padding="8dp" >
 
             <ImageView
@@ -44,13 +45,13 @@
                 android:layout_below="@+id/lbl_address"
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="5dp"
-                android:layout_toLeftOf="@+id/map_logo"
-                android:text="State Highway 602, Mota Varacha-Abrahma Road, Surat, Gujrat-394105" />
+                android:layout_toLeftOf="@+id/map_logo"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
+            android:minHeight="80dp"
             android:padding="8dp" >
 
             <ImageView
@@ -82,13 +83,13 @@
                 android:layout_below="@+id/lbl_email"
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="5dp"
-                android:layout_toLeftOf="@+id/mail_logo"
-                android:text="ppscambridge@yahoo.com" />
+                android:layout_toLeftOf="@+id/mail_logo"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
+            android:minHeight="80dp"
             android:padding="8dp" >
 
             <ImageView
@@ -120,13 +121,13 @@
                 android:layout_below="@+id/lbl_contact"
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="5dp"
-                android:layout_toLeftOf="@+id/contact_logo"
-                android:text="+91-261-6503388" />
+                android:layout_toLeftOf="@+id/contact_logo"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="120dp"
+            android:layout_height="wrap_content"
+            android:minHeight="120dp"
             android:padding="8dp" >
 
             <ImageView
@@ -158,8 +159,7 @@
                 android:layout_below="@+id/lbl_desc"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="50dp"
-                android:layout_toLeftOf="@+id/desc_logo"
-                android:text="P P Savani Chaitanya Vidya Sankul, managed by Prabuddha Education Trust was established on 1989 with 287 student." />
+                android:layout_toLeftOf="@+id/desc_logo"/>
         </RelativeLayout>
     </LinearLayout>
 

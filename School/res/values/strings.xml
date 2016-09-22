@@ -16,14 +16,14 @@
     <string name="auth_title">Select School</string>
     <string name="btn_auth_submit">Submit</string>
     <string name="forgot_title">Forgot</string>
-    <string name="forgot_email_hint">Enter email</string>
+    <string name="forgot_email_hint">Enter Email or Mobile-no</string>
     
     <!-- Login Activity -->
     <string name="login_title">Login</string>
     <string name="btn_login_submit">Login</string>
     <string name="tv_reg_link">Forgot Passowrd ??</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
+    <string name="email">Enter Email or Mobile-no</string>
+    <string name="password">Enter Password</string>
 
     <!-- Student Corner Fragment -->
     <string name="title_student_corner">Student Corner</string>

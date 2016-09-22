@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements
 
 		// display the first navigation drawer view on app launch
 		displayView(0);
-
 	}
 
 	@Override
@@ -110,10 +109,10 @@ public class MainActivity extends AppCompatActivity implements
 			fragment = new AttendenceFragment();
 			title = getString(R.string.title_attendence);
 			break;
-		case 2:
-			fragment = new StudentCornerFragment();
-			title = getString(R.string.title_student_corner);
-			break;
+//		case 2:
+//			fragment = new StudentCornerFragment();
+//			title = getString(R.string.title_student_corner);
+//			break;
 		case 3:
 			fragment = new TestFragment();
 			title = getString(R.string.title_testview);
